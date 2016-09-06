@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small "
+        android:id="@+id/product_name"
+        android:layout_marginLeft="49dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv2"
+        android:visibility="gone" />
+    <View
+        android:id="@+id/SplitLine_hor3"
+        android:layout_width="match_parent"
+        android:layout_height= "2dp"
+        android:background="@color/colorAccent"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5.5dp"
+        android:layout_marginLeft="7.5dp"
+        android:layout_marginRight="7.5dp" />
+</LinearLayout>

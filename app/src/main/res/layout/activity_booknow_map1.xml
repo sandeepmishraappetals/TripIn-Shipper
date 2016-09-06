@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+  <!--  <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView_for_welcome"
+        android:apiKey="@string/live_key_for_map"
+        android:clickable="true" >
+    </com.google.android.gms.maps.MapView>-->
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+    <LinearLayout
+        android:id="@+id/textView_for_welcome"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+
+        android:background="@drawable/backgroud_layout"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="ExtraText">
+        ----inside put all ur Views ----
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

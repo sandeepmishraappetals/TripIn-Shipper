@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    card_view:cardBackgroundColor="@color/colorWhite"
+    android:background="@color/colorWhite"
+    android:elevation="100dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:weightSum="1">
+
+        <Spinner
+            android:layout_width="139dp"
+            android:layout_height="43dp"
+            android:id="@+id/spinner"
+            android:layout_weight="0.26" />
+
+        <Spinner
+            android:layout_width="160dp"
+            android:layout_height="44dp"
+            android:id="@+id/spinner2" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

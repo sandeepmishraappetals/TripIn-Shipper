@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">TripIn-ShippersApp</string>
+    <string name="create_account">CREATE A TRIP IN ACCOUNT</string>
+    <string name="already_account">Already have an Account? LOG IN</string>
+    <string name="login">LOG IN</string>
+    <string name="new_account">NEW ACCOUNT</string>
+    <string name="google">Continue with Google</string>
+    <string name="fb">Continue with Facebook</string>
+    <string name="company_name">Name</string>
+    <string name="mob_email">Mobile Number/Email</string>
+    <string name="password">Password</string>
+    <string name="terms_condition">I AGREE TO THE TERMS AND CONDITION</string>
+    <string name="create_account1">CREATE ACCOUNT</string>
+    <string name="terms">TERMS AND CONDITIONS</string>
+    <string name="forgot_password">FORGOT PASSWORD</string>
+    <string name="password_recovery">PASSWORD RECOVERY</string>
+    <string name="password_recover1">ENTER EMAIL ID/ MOBILE NUMBER\n \nASSOCIATED WITH YOUR ACCOUNT</string>
+    <string name="password_recovery1_bt">CONTINUE</string>
+    <string name="password_recovery2_bt">BACK</string>
+    <string name="password_recovery2">INSTRUCTIONS TO RECOVER YOUR PASSWORD HAVE BEEN SENT TO YOUR EMAIL ID</string>
+    <string name="resend_otp">RESEND OTP</string>
+    <string name="change_no">CHANGE NUMBER</string>
+    <string name="pleasewait_otp_text">PLEASE WAIT WE AUTOMATICALLY \n \t \t\t\t DETECT THE OTP SENT TO</string>
+    <string name="valid_otp_text">(Valid for 200 seconds)</string>
+    <string name="enter_manually">OR ENTER MANUALLY</string>
+    <string name="otp_attemps">ATTEMPTS </string>
+    <string name="enter_new_number">Enter new mobile number</string>
+    <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="app_id">1420158084677767</string>
+    <string name="live_key_for_map">AIzaSyBnis7hDBXcX89LPJ5w4CtlPTWkxw8dIwI</string>
+    <string name="add_address">Add Address</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="survey_plot">Survey/Plot Number</string>
+    <string name="survey">*Survey/ Plot Number</string>
+    <string name="name_firm">*Name of firm </string>
+    <string name="address">*Address</string>
+    <string name="landmark">Landmark</string>
+    <string name="pincode">Pincode</string>
+    <string name="loading_time">*Loading time</string>
+    <string name="name_of_contact_person">*Name of Contact person</string>
+    <string name="mobile">*Mobile</string>
+    <string name="landline">Landline</string>
+    <string name="emailid">*Email ID</string>
+    <string name="select_firm">Company Type</string>
+    <string name="company_type">Company Type: </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

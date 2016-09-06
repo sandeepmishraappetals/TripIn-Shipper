@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:weightSum="1"
+        android:background="#FFFFFF">
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/bt_back"
+            android:src="@mipmap/arrow_appbar"
+            android:background="@color/transparant" />
+
+        <TextView
+            android:layout_width="204dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/password_recovery"
+            android:id="@+id/textView4"
+            android:gravity="center_vertical|center"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="0.59"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView3" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="455dp"
+            android:id="@+id/phone_verification">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ll_phoneverification_anim"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageView2"
+                    android:src="@mipmap/wheel"
+                    android:padding="5sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:padding="20dp"
+                android:layout_below="@+id/rl_OTP"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resend_otp"
+                    android:id="@+id/bt_resendOtp"
+                    android:layout_weight="0.5"
+                    android:background="@color/transparant"
+                    android:textColor="@color/colorSignup_login" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_no"
+                    android:id="@+id/bt_changeNo"
+                    android:layout_weight="0.5"
+                    android:background="@color/transparant"
+                    android:textColor="@color/colorSignup_login" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_OTP"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/ll_phoneverification_anim">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/pleasewait_otp_text"
+                    android:id="@+id/textView_plesewait"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:layout_above="@+id/textView_mobile"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_mobile"
+                    android:layout_above="@+id/textView_valid"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/valid_otp_text"
+                    android:id="@+id/textView_valid"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enter_manually"
+                    android:id="@+id/textView6"
+                    android:layout_below="@+id/textView_valid"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="26dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editText_OTP"
+                    android:layout_below="@+id/textView6"
+                    android:layout_centerHorizontal="true"
+                    android:maxLength="6"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/otp_attemps"
+                    android:id="@+id/textView_OTPAttempts"
+                    android:layout_above="@+id/textView_plesewait"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#e64f4f" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OK"
+                    android:id="@+id/ok"
+                    android:layout_alignTop="@+id/editText_OTP"
+                    android:layout_toEndOf="@+id/textView_plesewait"
+                    android:layout_toRightOf="@+id/textView_plesewait"
+                    android:layout_alignBottom="@+id/editText_OTP" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

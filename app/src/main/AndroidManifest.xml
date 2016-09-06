@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tripin.com.tripin_shipper">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <application
+        android:name=".volley.AppController"
+        android:allowBackup="true"
+        android:icon="@drawable/tripin_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBnis7hDBXcX89LPJ5w4CtlPTWkxw8dIwI"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
+        <activity android:name=".activity.Activity_Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.Activity_Main"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <activity android:name=".activity.SignUp_Activity"
+            />
+        <activity android:name=".activity.SignIn_Activity"
+            android:theme="@style/Theme.AppCompat"/>
+        <activity android:name=".activity.Activity_phoneNumberVerification"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <activity android:name=".activity.Activity_ForgotPassword"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <activity android:name=".activity.Activity_terms"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <activity android:name=".activity.Password_RecoveryActivity"/>
+        <activity android:name=".activity.DashBoardActivity"/>
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+<activity android:name=".activity.Activity_forgot"/>
+        <activity android:name=".activity.Activity_Maps"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <activity android:name=".activity.Activity_Search"/>
+        <activity android:name=".activity.Activity_Search1"/>
+        <activity android:name=".activity.Activity_Address_page"/>
+        <activity android:name=".activity.Activity_AddressBook"/>
+        <activity android:name=".activity.Activity_Dashboard"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".activity.Activity_state"/>
+        <activity android:name=".activity.SingleItemView"/>
+        <activity android:name=".activity.Activity_CityNew"/>
+        <activity android:name=".activity.Add_Update_User"/>
+        <activity android:name=".activity.Main_Screen"/>
+    </application>
+
+</manifest>
