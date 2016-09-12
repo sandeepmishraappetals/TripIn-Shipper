@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        layout="@layout/header_add_address"
+        android:id="@+id/address_header" />
+
+
+
+    <ScrollView android:layout_height="500dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1.29">
+        <LinearLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/address_page_1"
+        android:id="@+id/page1" />
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/address_page_2"
+        android:id="@+id/page2" />
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/address_page_3"
+            android:id="@+id/page3" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_address"
+        android:id="@+id/Add_address"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp" />
+
+</LinearLayout>

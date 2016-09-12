@@ -62,8 +62,9 @@
         <activity android:name=".activity.Activity_state"/>
         <activity android:name=".activity.SingleItemView"/>
         <activity android:name=".activity.Activity_CityNew"/>
-        <activity android:name=".activity.Add_Update_User"/>
-        <activity android:name=".activity.Main_Screen"/>
+        <activity android:name=".activity.Activity_addBook"/>
+        <activity android:name=".activity.Activity_TruckSelection"/>
+        <activity android:name=".activity.Activity_Tuck12"/>
     </application>
 
 </manifest>

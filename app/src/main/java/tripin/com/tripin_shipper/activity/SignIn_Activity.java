@@ -125,6 +125,7 @@ public class SignIn_Activity extends AppCompatActivity implements View.OnClickLi
             }
         };
         setContentView(R.layout.activity_login);
+
         final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         Access_Token=(mSharedPreference.getString("Token", null));
      //   Log.e("@@Access Token", Access_Token);
@@ -170,7 +171,7 @@ public class SignIn_Activity extends AppCompatActivity implements View.OnClickLi
                 // Check for empty data in the form
                 if (email.trim().length() > 0 && password.trim().length() > 0) {
                     // login user
-                    checkLogin(email, password);
+                    checkLogin(email, password, Access_Token);
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
@@ -191,127 +192,136 @@ public class SignIn_Activity extends AppCompatActivity implements View.OnClickLi
                 finish();
             }
         });
+        }
 
-    }
 
     /**
      * function to verify login details in mysql db
      * */
-    private void checkLogin(final String email, final String password) {
-        // Tag used to cancel the request
-        String tag_string_req = "req_login";
+    private void checkLogin(final String email, final String password, final String access_Token) {
+        if (AppController.getInstance().isConnected(this))
+        {
+            // Tag used to cancel the request
+            String tag_string_req = "req_login";
 
-        pDialog.setMessage("Logging in ...");
-        showDialog();
+            pDialog.setMessage("Logging in ...");
+            showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                Config_URL.URL_LOGIN, new Response.Listener<String>() {
+            StringRequest strReq = new StringRequest(Request.Method.POST,
+                    Config_URL.URL_LOGIN, new Response.Listener<String>() {
 
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
-                hideDialog();
-
-                try {
-
-                    JSONObject jObj = new JSONObject(response);
-                    //  boolean error = jObj.getBoolean("error");
-                    String error = jObj.getString("message");
-                    int status = jObj.getInt("status");
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "Login Response: " + response.toString());
+                    hideDialog();
 
                     try {
-                        JSONObject data = jObj.getJSONObject("data");
-                        String user_id = jObj.optString("user_id");
-                        User user = new User();
-                        user.setUser_id(user_id);
-                    }
 
-                    catch (Exception ex)
-                    {
-                        ex.toString();
-                    }
-                    // Check for error node in json
+                        JSONObject jObj = new JSONObject(response);
+                        //  boolean error = jObj.getBoolean("error");
+                        String error = jObj.getString("message");
+                        int status = jObj.getInt("status");
+
+                        try {
+
+
+                        }
+
+                        catch (Exception ex)
+                        {
+                            ex.toString();
+                        }
+                        // Check for error node in json
                   /*  if (error!=null)*/
-                    if ( status == 1)
-                    {
-                        // user successfully logged in
-                        // Create login session
+                        if ( status == 1)
+                        {
+                            // user successfully logged in
+                            // Create login session
+                            JSONObject data = jObj.getJSONObject("data");
+                            String user_id = data.optString("user_id");
+                            User user = new User();
+                            user.setUser_id(user_id);
+                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SignIn_Activity.this);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("UserId", user_id);
+                            editor.commit();
+                            session.setLogin(true);
 
-                        session.setLogin(true);
-
-                        // Launch main activity
-                        Intent intent = new Intent(SignIn_Activity.this,
-                                Activity_Dashboard.class);
+                            // Launch main activity
+                            Intent intent = new Intent(SignIn_Activity.this,
+                                    Activity_Dashboard.class);
                                /* Activity_Address_page.class);*/
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        // Error in login. Get the error message
-                        String errorMsg = jObj.getString("message");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            // Error in login. Get the error message
+                            String errorMsg = jObj.getString("message");
+                            Toast.makeText(getApplicationContext(),
+                                    errorMsg, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        // JSON error
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
+
                 }
+            }, new Response.ErrorListener() {
 
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Oauth Error: " + error.getMessage());
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e(TAG, "Oauth Error: " + error.getMessage());
                /* Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();*/
-                // As of f605da3 the following should work
-                NetworkResponse response = error.networkResponse;
-                if (error instanceof ServerError && response != null) {
-                    try {
-                        String res = new String(response.data,
-                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
-                        // Now you can use any deserializer to make sense of data
-                        JSONObject obj = new JSONObject(res);
-                    } catch (UnsupportedEncodingException e1) {
-                        // Couldn't properly decode data to string
-                        e1.printStackTrace();
-                    } catch (JSONException e2) {
-                        // returned data is not JSONObject?
-                        e2.printStackTrace();
+                    // As of f605da3 the following should work
+                    NetworkResponse response = error.networkResponse;
+                    if (error instanceof ServerError && response != null) {
+                        try {
+                            String res = new String(response.data,
+                                    HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                            // Now you can use any deserializer to make sense of data
+                            JSONObject obj = new JSONObject(res);
+                        } catch (UnsupportedEncodingException e1) {
+                            // Couldn't properly decode data to string
+                            e1.printStackTrace();
+                        } catch (JSONException e2) {
+                            // returned data is not JSONObject?
+                            e2.printStackTrace();
+                        }
                     }
                 }
-            }
-        }) {
+            }) {
 
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("tag", "login");
-                params.put("username", email);
-                params.put("password", password);
-                params.put("access_token",Access_Token);
+                @Override
+                protected Map<String, String> getParams() {
+                    // Posting parameters to login url
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("tag", "login");
+                    params.put("username", email);
+                    params.put("password", password);
+                    params.put("access_token",access_Token);
 
-                return params;
-            }
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+                    return params;
+                }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String,String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 
-                return headers;
-            }
-            @Override
-            public String getBodyContentType() {
-                return "application/json";
-            }
-        };
-        strReq.setRetryPolicy(new DefaultRetryPolicy(60000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+                    return headers;
+                }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+            };
+            strReq.setRetryPolicy(new DefaultRetryPolicy(60000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            // Adding request to request queue
+            AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        }
+
     }
 
     private void showDialog() {

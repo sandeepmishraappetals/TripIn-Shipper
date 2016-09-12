@@ -9,7 +9,9 @@ import android.view.MenuItem;
 
 import tripin.com.tripin_shipper.R;
 import tripin.com.tripin_shipper.adapter.ViewPagerAdapter;
+import tripin.com.tripin_shipper.fragment.AddressesFragment;
 import tripin.com.tripin_shipper.fragment.FirstFragment;
+import tripin.com.tripin_shipper.model.AddressList;
 import tripin.com.tripin_shipper.widget.SlidingTabLayout;
 
 /**
@@ -23,6 +25,7 @@ public class Activity_Dashboard extends ActionBarActivity implements FirstFragme
     SlidingTabLayout tabs;
     CharSequence Titles[]={"BOOK NOW","TRUCK STATUS"};
     int Numboftabs =2;
+    public AddressesFragment addressesFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,8 @@ public class Activity_Dashboard extends ActionBarActivity implements FirstFragme
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+        AddressList.mainActivity = this;
+        //setAddressesFragment();
     }
 
     @Override
@@ -78,4 +83,13 @@ public class Activity_Dashboard extends ActionBarActivity implements FirstFragme
     public void onFragmentInteraction(Uri uri) {
 
     }
+    public void setAddressesFragment(int placer) {
+        addressesFragment = new AddressesFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(placer, addressesFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 }

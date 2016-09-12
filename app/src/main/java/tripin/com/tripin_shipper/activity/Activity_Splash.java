@@ -54,6 +54,7 @@ private User user;
                 // This method will be executed once the timer is over
                 // Start your app main activity
                 Intent i = new Intent(Activity_Splash.this, Activity_Main.class);
+
                 Oauth(client_id, grant_type, client_secret);
 
                 startActivity(i);

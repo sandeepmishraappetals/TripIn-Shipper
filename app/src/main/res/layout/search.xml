@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/header_search"
+        android:id="@+id/header_search" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/_12dp"
+        android:background="@drawable/search_shape"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp">
+        <EditText android:id="@+id/myFilter" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:ems="10"
+            android:hint=""
+            android:layout_marginTop="@dimen/_10dp"
+            android:background="@color/transparant"
+            android:layout_toRightOf="@+id/imageView3"
+            android:layout_toEndOf="@+id/imageView3"
+            android:layout_marginLeft="13dp">
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="12dp"
+            android:src="@mipmap/search"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="9dp" />
+    </RelativeLayout>
+    <ListView android:id="@+id/list" android:layout_width="wrap_content"
+        android:layout_height="257dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginBottom="21.5dp"
+        android:layout_marginTop="26dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add address"
+        android:id="@+id/bt_address"
+        android:layout_gravity="center_horizontal" />
+
+    <android.support.v7.widget.ListViewCompat
+        android:id="@+id/addressListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.ListViewCompat>
+
+
+</LinearLayout>

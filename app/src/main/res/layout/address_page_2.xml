@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/name_firm"
+        style="@style/AddressGrayHintText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SplitLine_hor2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/edittext_bottom_line"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="19.5dp"
+        android:layout_marginTop="32.5dp">
+
+        <tripin.com.tripin_shipper.widget.EditTextViewLatoRegular
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/name"
+            android:inputType="text"
+            android:hint="@string/name_firm"
+
+            android:textSize="15sp"
+            android:textColor="@color/Add_address_text"
+            android:background="@color/transparant"
+            android:paddingBottom="5dp" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/name_address"
+        style="@style/AddressGrayHintText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name_firm"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edittext_bottom_line"
+        android:layout_marginLeft="20.5dp"
+        android:layout_marginRight="19.5dp"
+        android:layout_marginTop="30.5dp">
+
+        <tripin.com.tripin_shipper.widget.EditTextViewLatoRegular
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/address"
+            android:layout_gravity="center_horizontal"
+            android:inputType="text"
+            android:hint="@string/address"
+            android:textSize="15sp"
+            android:textColor="@color/Add_address_text"
+            android:background="@color/transparant"
+            android:paddingBottom="5dp" />
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/scrollView4"
+        android:layout_alignLeft="@+id/linearLayout4"
+        android:layout_alignStart="@+id/linearLayout4"
+        android:layout_alignRight="@+id/linearLayout4"
+        android:layout_alignEnd="@+id/linearLayout4"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="2dp"
+            android:weightSum="1"
+            android:layout_marginLeft="19dp"
+            android:layout_marginRight="18.5dp"
+            android:layout_marginTop="32dp">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_landmark"
+                style="@style/AddressGrayHintText"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:weightSum="1"
+                android:layout_marginRight="5dp">
+
+                <tripin.com.tripin_shipper.widget.EditTextViewLatoRegular
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/landmark"
+
+                    android:hint="@string/landmark"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="@dimen/_4dp"
+                    android:inputType="text"
+                    android:textColor="@color/Add_address_text"
+                    android:background="@drawable/edittext_bottom_line"
+                    android:paddingBottom="5dp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_pincode"
+                style="@style/AddressGrayHintText"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="right"
+                android:weightSum="1">
+
+                <tripin.com.tripin_shipper.widget.EditTextViewLatoRegular
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/pincode"
+                    android:hint="@string/pincode"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="@dimen/_4dp"
+                    android:inputType="number"
+                    android:textColor="@color/Add_address_text"
+                    android:background="@drawable/edittext_bottom_line"
+                    android:paddingBottom="5dp" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/loading_time"
+        style="@style/AddressGrayHintText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bottom_line"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="19.5dp"
+        android:layout_marginTop="30dp"
+        android:clickable="true">
+
+        <tripin.com.tripin_shipper.widget.EditTextViewLatoRegular
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/loadingtime"
+            android:layout_gravity="center_horizontal"
+            android:inputType="text"
+            android:hint="@string/loading_time"
+
+            android:textSize="15sp"
+            android:background="@color/transparant"
+            android:paddingBottom="5dp" />
+    </android.support.design.widget.TextInputLayout>
+    <ImageView
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:id="@+id/im1"
+        android:src="@mipmap/rectangle_2"
+        android:foregroundGravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/state"
+        android:layout_alignEnd="@+id/state"
+        android:layout_marginBottom="5.5dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp" />
+    <View
+        android:id="@+id/SplitLine_hor123"
+        android:layout_width="fill_parent"
+        android:layout_height= "2dp"
+        android:background="@color/colorAccent"
+        android:layout_below="@+id/loading_time"
+        android:layout_alignLeft="@+id/SplitLine_hor2"
+        android:layout_alignStart="@+id/SplitLine_hor2"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="7.5dp"
+        android:layout_marginLeft="7.5dp" />
+</LinearLayout>

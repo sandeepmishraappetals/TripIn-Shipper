@@ -2,14 +2,18 @@ package tripin.com.tripin_shipper.volley;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import tripin.com.tripin_shipper.Connectivity.ConnectivityReceiver;
 
 /*
 * 	We are creating a Application Singleton Object by extending Application, so it should be declared as a application in the "AndroidMainFests" file
@@ -104,11 +110,34 @@ public class AppController extends Application
 
 		}
 	}
+
+	public  boolean isConnected(Context context) {
+		ConnectivityManager
+				cm = (ConnectivityManager) AppController.getInstance().getApplicationContext()
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+		boolean isConnected = activeNetwork != null
+				&& activeNetwork.isConnectedOrConnecting();
+		if (isConnected){
+
+		}
+else {
+			Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+		}
+		return isConnected;
+
+	}
+
+
 	public void hideSoftKeyboard(Activity context) {
 		if(context.getCurrentFocus()!=null) {
 			InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 			inputMethodManager.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), 0);
 		}
+	}
+	public void setConnectivityListener(ConnectivityReceiver.ConnectivityReceiverListener listener) {
+		ConnectivityReceiver.connectivityReceiverListener = listener;
 	}
 
 }

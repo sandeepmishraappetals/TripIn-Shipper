@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <tripin.com.tripin_shipper.widget.TextViewLatoRegular
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small "
+        android:id="@+id/firm_name"
+        android:layout_marginLeft="49dp"
+        android:textColor="#4c4c4c"
+        android:layout_marginTop="12dp" />
+
+    <tripin.com.tripin_shipper.widget.TextViewLatoRegular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/address"
+        android:visibility="visible"
+        android:layout_below="@+id/firm_name"
+        android:layout_alignLeft="@+id/firm_name"
+        android:layout_alignStart="@+id/firm_name"
+        android:layout_marginBottom="11.5dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_bt"
+        android:layout_alignBottom="@+id/firm_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="31dp"
+        android:layout_marginEnd="22dp"
+        android:src="@mipmap/edit_icon"
+        android:background="@color/transparant"
+        android:layout_marginTop="54dp" />
+</RelativeLayout>
+</LinearLayout>

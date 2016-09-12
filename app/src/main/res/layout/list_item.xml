@@ -3,28 +3,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <tripin.com.tripin_shipper.widget.TextViewLatoRegular
         android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small "
         android:id="@+id/product_name"
-        android:layout_marginLeft="49dp" />
+        android:layout_marginLeft="49dp"
+        android:textColor="#4c4c4c"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16.5dp" />
 
-    <TextView
+    <tripin.com.tripin_shipper.widget.TextViewLatoRegular
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/tv2"
         android:visibility="gone" />
-    <View
-        android:id="@+id/SplitLine_hor3"
-        android:layout_width="match_parent"
-        android:layout_height= "2dp"
-        android:background="@color/colorAccent"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5.5dp"
-        android:layout_marginLeft="7.5dp"
-        android:layout_marginRight="7.5dp" />
 </LinearLayout>

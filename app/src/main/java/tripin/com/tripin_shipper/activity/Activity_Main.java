@@ -33,7 +33,7 @@ public class Activity_Main extends Activity implements View.OnClickListener{
     Integer[] image = {
           /*  R.drawable.splash,*/
             R.drawable.view2,
-            R.drawable.view2,
+            R.drawable.splash,
 
     };
     private String getColoredSpanned(String text, String color) {
@@ -136,7 +136,8 @@ public class Activity_Main extends Activity implements View.OnClickListener{
                     NetworkUtils.showNoInternetDialog(Maincontext);
                 } else {
                     //SignUp Activity
-                    Intent i = new Intent (this, SignUp_Activity.class);
+                  //  Intent i = new Intent (this, SignUp_Activity.class);
+                    Intent i = new Intent(this, Activity_Tuck12.class);
                     startActivity(i);
                 }
 
