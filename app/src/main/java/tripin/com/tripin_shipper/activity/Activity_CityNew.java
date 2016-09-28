@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -37,11 +38,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import tripin.com.tripin_shipper.AppController;
 import tripin.com.tripin_shipper.R;
 import tripin.com.tripin_shipper.adapter.CustomListAdapter_city;
 import tripin.com.tripin_shipper.model.City;
 import tripin.com.tripin_shipper.model.Countries;
-import tripin.com.tripin_shipper.volley.AppController;
 import tripin.com.tripin_shipper.volley.Config_URL;
 
 /**
@@ -60,10 +61,16 @@ public class Activity_CityNew extends Activity {
     private Activity activity;
     TextView head_label; private ImageButton back;
     private EditText MyFilter_ed;
+    private Button addAddress;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+        init();
+
+    }
+
+    private void init() {
         final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(this);
         Access_Token=(mSharedPreference.getString("Token", null));
         Countries c = new Countries();
@@ -93,7 +100,7 @@ public class Activity_CityNew extends Activity {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-           //     Activity_CityNew.this.adapter.getFilter().filter(cs);
+                //     Activity_CityNew.this.adapter.getFilter().filter(cs);
 
 
             }
@@ -126,7 +133,10 @@ public class Activity_CityNew extends Activity {
                 startActivity(i);
             }
         });
+        addAddress = (Button) findViewById(R.id.bt_address) ;
+        addAddress.setVisibility(View.GONE);
     }
+
     private void StateList(final String access_token)  {
         // Tag used to cancel the request
         String tag_string_req = "State";

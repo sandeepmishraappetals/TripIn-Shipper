@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId "tripin.com.tripin_shipper"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         // Enabling multidex support.
@@ -29,10 +29,10 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
     //noinspection GradleCompatible
     //noinspection GradleCompatible
     /*  compile 'com.google.firebase:firebase-ads:9.0.2'*/
+    // Glide image library
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.android.support:design:24.2.0'
@@ -44,6 +44,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
     compile 'com.android.support:support-v4:24.2.0'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:design:23.0.1'
+    compile 'com.sothree.slidinguppanel:library:3.2.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    testCompile 'junit:junit:4.12'
 }

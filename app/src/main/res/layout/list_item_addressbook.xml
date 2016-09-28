@@ -11,7 +11,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small "
         android:id="@+id/firm_name"
-        android:layout_marginLeft="49dp"
+        android:layout_marginLeft="23dp"
         android:textColor="#4c4c4c"
         android:layout_marginTop="12dp" />
 

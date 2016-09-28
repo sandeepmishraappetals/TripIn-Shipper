@@ -57,7 +57,7 @@ import tripin.com.tripin_shipper.SharedPreference.SharedPreference;
 import tripin.com.tripin_shipper.helper.SQLiteHandler;
 import tripin.com.tripin_shipper.helper.SessionManager;
 import tripin.com.tripin_shipper.utils.NetworkUtils;
-import tripin.com.tripin_shipper.volley.AppController;
+import tripin.com.tripin_shipper.AppController;
 import tripin.com.tripin_shipper.volley.Config_URL;
 
 import static android.widget.Toast.LENGTH_LONG;

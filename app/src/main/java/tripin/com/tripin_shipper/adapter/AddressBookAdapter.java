@@ -87,17 +87,18 @@ public class AddressBookAdapter extends BaseAdapter implements SearchView.OnClos
             holder.nameTv = (TextView) vi.findViewById(R.id.text);
 
             Log.e("pickup", ""+position );
-            for(int i = 0;i<AddressList.pickUpList.size();i++){
+            for(int i = 0; i< AddressList.pickUpList.size(); i++){
                 String currAddress   = data.get(position).getAddress();
                 String address = AddressList.pickUpList.get(i).getAddress();
+                int addressID = AddressList.pickUpList.get(i).getId();
 
-                Log.e("pickup", ""+currAddress + " " +address );
+                Log.e("pickup", ""+currAddress + " " +address + " "+ addressID);
                 if(currAddress.equals(address) ){
                     holder.itemView.setAlpha(AddressList.diabledAlphaValue);
                 }
             }
 
-            for(int i = 0;i<AddressList.dropList.size();i++){
+            for(int i = 0; i< AddressList.dropList.size(); i++){
                 String currAddress = data.get(position).getAddress();
                 String address = AddressList.dropList.get(i).getAddress();
 
@@ -140,7 +141,7 @@ public class AddressBookAdapter extends BaseAdapter implements SearchView.OnClos
                     Toast.makeText(activity.getApplicationContext(),
                             "Position :"+itemPosition+"  ListItem : " +data.get(itemPosition).getName() , Toast.LENGTH_LONG)
                             .show();
-                    activity.sendResultToCallingActivity();
+                    activity.sendResultToCallingActivity(new AddressObj(0, "", "", "", ""));
                /* }else{
                     Toast.makeText(activity.getApplicationContext(),
                            "Selcted Address alreeady added in list " , Toast.LENGTH_LONG)

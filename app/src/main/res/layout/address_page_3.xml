@@ -24,7 +24,8 @@
             android:textSize="15sp"
             android:textColor="@color/Add_address_text"
             android:background="@color/transparant"
-            android:paddingBottom="5dp" />
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
     </android.support.design.widget.TextInputLayout>
     <ImageButton
         android:layout_width="32dp"
@@ -54,10 +55,10 @@
             android:id="@+id/input_layout_mobile"
             style="@style/AddressGrayHintText"
             android:layout_width="121dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.50"
             android:background="@drawable/edittext_bottom_line"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="3dp">
 
             <tripin.com.tripin_shipper.widget.EditTextViewLatoRegular
                 android:layout_width="121dp"
@@ -69,7 +70,8 @@
                 android:layout_marginBottom="5dp"
                 android:inputType="phone"
                 android:textColor="@color/Add_address_text"
-                android:background="@color/transparant" />
+                android:background="@color/transparant"
+                android:paddingTop="1dp" />
         </android.support.design.widget.TextInputLayout>
         <View
             android:id="@+id/contact_person"
@@ -88,7 +90,7 @@
             style="@style/AddressGrayHintText"
             android:layout_width="121dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="3dp"
             android:layout_marginLeft="5dp"
             android:layout_gravity="right"
             android:layout_weight="0.50"
@@ -105,7 +107,8 @@
                 android:layout_marginBottom="5dp"
                 android:inputType="number"
                 android:textColor="@color/Add_address_text"
-                android:background="@color/transparant" />
+                android:background="@color/transparant"
+                android:paddingTop="5dp" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
     <android.support.design.widget.TextInputLayout
@@ -117,7 +120,7 @@
         android:background="@drawable/edittext_bottom_line"
         android:layout_marginLeft="19.5dp"
         android:layout_marginRight="17.5dp"
-        android:paddingBottom="5dp">
+        android:paddingBottom="3dp">
 
         <tripin.com.tripin_shipper.widget.EditTextViewLatoRegular
             android:layout_width="match_parent"
@@ -128,7 +131,8 @@
             android:textSize="15sp"
             android:inputType="textEmailAddress"
             android:textColor="@color/Add_address_text"
-            android:background="@color/transparant"/>
+            android:background="@color/transparant"
+            android:paddingTop="5dp" />
     </android.support.design.widget.TextInputLayout>
 
     <tripin.com.tripin_shipper.widget.TextViewLatoRegular

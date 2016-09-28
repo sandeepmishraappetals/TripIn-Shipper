@@ -7,8 +7,7 @@
         android:id="@+id/mapConatiner"
         android:foreground="#50000000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"></RelativeLayout>
+        android:layout_height="match_parent"></RelativeLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -19,9 +18,13 @@
             android:id="@+id/addFirstAddressConatiner"
             android:background="#00000000"
             android:layout_margin="10dp"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"></RelativeLayout>
+            android:layout_marginBottom="0dp"></RelativeLayout>
+
+        <include
+            layout="@layout/single_pick_up_drop_item_only_vert_line"/>
 
         <RelativeLayout
             android:id="@+id/addSecondFiAddressConatiner"
@@ -34,23 +37,7 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/swipeIndicationVg"
-        android:background="#30000000"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <TextView
-            android:text="Swipe down to create a new sequence for new route"
-            android:padding="20dp"
-            android:textSize="20dp"
-            android:textColor="@android:color/white"
-            android:gravity="center"
-            android:layout_marginTop="200dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/addressSwapVg"
@@ -66,12 +53,44 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:layout_below="@+id/heading"
-                android:id="@+id/content"
-                android:background="#00000000"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"></RelativeLayout>
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_below="@+id/heading"
+                    android:id="@+id/content"
+                    android:background="#00000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"></RelativeLayout>
+
+                <TextView
+                    android:id="@+id/pickUpOptionDialogTv"
+                    android:textColor="@android:color/holo_blue_bright"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    android:padding="5dp"
+                    android:gravity="center_horizontal"
+                    android:layout_below="@+id/content"
+                    android:text="Choose different route"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!--<TextView
+                    android:id="@+id/pickUpCheapestOptionDialogTv"
+                    android:textColor="@android:color/holo_blue_bright"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    android:padding="5dp"
+                    android:gravity="center_horizontal"
+                    android:layout_below="@+id/content"
+                    android:text="SHOW CHEAPEST ROUTE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />-->
+
+            </RelativeLayout>
+
+
 
         </android.support.v7.widget.CardView>
 
@@ -81,51 +100,86 @@
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_below="@+id/content"
-                android:id="@+id/content2"
-                android:background="#00000000"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></RelativeLayout>
-        </android.support.v7.widget.CardView>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/content2"
+                    android:background="#00000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></RelativeLayout>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/dropOptionDialogTv"
+                    android:textColor="@android:color/holo_blue_bright"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    android:padding="5dp"
+                    android:gravity="center_horizontal"
+                    android:layout_below="@+id/content2"
+                    android:text="Choose different route"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+               <!-- <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/dropUpCheapestOptionDialogTv"
+                    android:textColor="@android:color/holo_blue_bright"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    android:padding="5dp"
+                    android:gravity="center_horizontal"
+                    android:layout_below="@+id/content2"
+                    android:text="SHOW CHEAPEST ROUTE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />-->
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
 
+    <include layout="@layout/addresses_alert"
+        android:id="@+id/common_alert"/>
 
     <RelativeLayout
-        android:background="@android:color/holo_blue_bright"
+        android:background="@color/bottom_btn_bg_color"
         android:id="@+id/showCheapestRoadTvParent"
-        android:padding="15dp"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:textSize="25sp"
+        <tripin.com.tripin_shipper.widget.TextViewLatoBold
+            android:textSize="@dimen/LARGE"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
-            android:text="SHow Cheapest Route"
+            android:textColor="@color/white"
+            android:text="SHOW CHEAPEST ROUTE"
             android:id="@+id/showCheapestRoadTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:background="@android:color/holo_blue_bright"
-        android:layout_margin="20dp"
-        android:padding="15dp"
+        android:background="@color/bottom_btn_bg_color"
+        android:layout_margin="8dp"
+        android:padding="5dp"
         android:id="@+id/confirmRouteTvParent"
         android:layout_alignParentBottom="true"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:textSize="25sp"
+        <tripin.com.tripin_shipper.widget.TextViewLatoBold
+            android:textSize="@dimen/MEDIUM"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
-            android:text="Confirm Route"
+            android:text="CONFIRM ROUTE"
+            android:textColor="@color/white"
             android:id="@+id/confirmRouteTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -133,15 +187,16 @@
 
 
     <RelativeLayout
-        android:background="@android:color/holo_blue_bright"
+        android:background="@color/bottom_btn_bg_color"
         android:id="@+id/trucksAvailableTvParent"
         android:layout_alignParentBottom="true"
-        android:padding="15dp"
-        android:visibility="visible"
+        android:visibility="gone"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:textSize="25sp"
+        <tripin.com.tripin_shipper.widget.TextViewLatoBlack
+            android:textSize="@dimen/MEDIUM"
+            android:textColor="@color/white"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
             android:text="43 TRUCKS"
@@ -149,20 +204,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:textSize="15sp"
+        <tripin.com.tripin_shipper.widget.TextViewLatoRegular
+            android:textSize="@dimen/SMALL"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
             android:text="Available on this route"
+            android:textColor="@color/white"
             android:id="@+id/trucksAvailableTv2"
             android:layout_below="@+id/trucksAvailableTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/swipeIndicationVg"
+        android:background="#30000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <include layout="@layout/addresses_alert"
-        android:id="@+id/common_alert"/>
+        <tripin.com.tripin_shipper.widget.TextViewLatoRegular
+            android:text="Swipe up or down to create a new sequence for new route"
+            android:padding="20dp"
+            android:textSize="@dimen/MEDIUM"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="120dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

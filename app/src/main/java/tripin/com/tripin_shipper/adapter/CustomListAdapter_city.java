@@ -16,10 +16,10 @@ import com.android.volley.toolbox.ImageLoader;
 
 import java.util.List;
 
+import tripin.com.tripin_shipper.AppController;
 import tripin.com.tripin_shipper.R;
 import tripin.com.tripin_shipper.activity.Activity_Address_page;
 import tripin.com.tripin_shipper.model.City;
-import tripin.com.tripin_shipper.volley.AppController;
 
 /**
  * Created by SUMEET on 03-09-2016.
@@ -62,6 +62,7 @@ public class CustomListAdapter_city extends BaseAdapter {
 
         TextView title = (TextView) convertView.findViewById(R.id.product_name);
         TextView rating = (TextView) convertView.findViewById(R.id.tv2);
+        View rowView = (View) convertView.findViewById(R.id.rowView);
 
         // getting movie data for the row
       City m = city.get(position);
@@ -71,6 +72,11 @@ public class CustomListAdapter_city extends BaseAdapter {
         title.setText((CharSequence) m.getCity_name());
 
         Log.e("@adaper-name", String.valueOf(m.getCity_name()) + " "+ getCount());
+        if (position == 2)
+        {
+            rowView.setVisibility(View.VISIBLE);
+
+        }
 
 
 // Listen for ListView Item Click

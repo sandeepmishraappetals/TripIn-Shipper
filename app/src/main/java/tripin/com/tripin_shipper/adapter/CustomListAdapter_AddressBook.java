@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 
@@ -22,7 +23,7 @@ import tripin.com.tripin_shipper.activity.Activity_Address_page;
 import tripin.com.tripin_shipper.model.AddressBook;
 import tripin.com.tripin_shipper.model.AddressList;
 import tripin.com.tripin_shipper.model.AddressObj;
-import tripin.com.tripin_shipper.volley.AppController;
+import tripin.com.tripin_shipper.AppController;
 
 /**
  * Created by Android on 08/09/16.
@@ -32,6 +33,7 @@ public class CustomListAdapter_AddressBook extends BaseAdapter {
     private LayoutInflater inflater;
     private List<AddressBook> addressBook;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+    private String whichList;
     public CustomListAdapter_AddressBook(Activity activity, List<AddressBook> addressBook) {
         this.activity = (Activity_AddressBook) activity;
         this.addressBook = addressBook;
@@ -43,6 +45,7 @@ public class CustomListAdapter_AddressBook extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
+        Log.e("currentItem", ""+position +  " " + addressBook.get(position).getAddress());
         return addressBook.get(position);
     }
 
@@ -56,6 +59,7 @@ public class CustomListAdapter_AddressBook extends BaseAdapter {
         if (inflater == null)
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_item_addressbook, null);
 
@@ -78,6 +82,7 @@ public class CustomListAdapter_AddressBook extends BaseAdapter {
         edit_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
               /*  if ((m.getAddress_id().trim().contains("0"))) {
 
                     Log.e("@@ address_adapter", m.getAddress_id());
@@ -102,6 +107,8 @@ public class CustomListAdapter_AddressBook extends BaseAdapter {
 
                     intent.putExtra("mode", 1);
                     intent.putExtra("addressBundle", bundle);
+                intent.putExtra("AddressId",addressBook.get(position).getAddress_id());
+                Log.e("AddressId", addressBook.get(position).getAddress_id());
 
                     // Pass all data flag
                     // Start SingleItemView Class
@@ -146,22 +153,77 @@ public class CustomListAdapter_AddressBook extends BaseAdapter {
                 int id = Integer.parseInt(addressBook.get(position).getAddress_id());
                 String name = addressBook.get(position).getFirm_name();
                 String address = addressBook.get(position).getAddress();
-                String lat = "1.000";
-                String lon = "1.000";
+                /*String lat = "1.000";
+                String lon = "1.000";*/
+                String lat = addressBook.get(position).getLat();
+                String lon = addressBook.get(position).getLng();
                 AddressObj addressSelected = new AddressObj(id, name, address, lat, lon );
+                Log.e("addBook_Adapter", lat+lon);
                 // boolean allow = activity.allowAddressAddition(addressSelected);
 
-                // if(allow){
-                if(activity.SELECTED_TYPE == activity.PICKUP){
-                    AddressList.pickUpList.add(addressSelected);
-                }else  if(activity.SELECTED_TYPE == activity.DROP){
-                    AddressList.dropList.add(addressSelected);
+                if(finalConvertView.getAlpha() >= 1.0){
+                    // if(allow){
+                    if(activity.SELECTED_TYPE == activity.PICKUP){
+                        AddressList.pickUpList.add(addressSelected);
+                    }else  if(activity.SELECTED_TYPE == activity.DROP){
+                        AddressList.dropList.add(addressSelected);
+                    }
+
+
+
+                    activity.sendResultToCallingActivity(addressSelected);
+               }else{
+                    Toast.makeText(activity, "Address already selected in "+whichList, Toast.LENGTH_LONG).show();
                 }
 
-                activity.sendResultToCallingActivity();
+                Log.e("convertView", "alpha is " + finalConvertView.getAlpha());
+
             }
         });
+
+
+
+        Log.e("pickup", ""+position );
+        for(int i = 0; i< AddressList.pickUpList.size(); i++){
+            String currFirmName = addressBook.get(position).getFirm_name();
+            String listFirmName = AddressList.pickUpList.get(i).getName();
+            String currAddress   = addressBook.get(position).getAddress();
+            String listAddress = AddressList.pickUpList.get(i).getAddress();
+
+            Log.e("pickup", ""+currAddress + "-------- " +listAddress );
+            if(currFirmName.equals(listFirmName) && currAddress.equals(listAddress) ){
+                Log.e("pickup", "matched " +position);
+                finalConvertView.setAlpha(AddressList.diabledAlphaValue);
+                whichList = "Pick Up List";
+            }
+        }
+
+        for(int i = 0; i< AddressList.dropList.size(); i++){
+            String currFirmName = addressBook.get(position).getFirm_name();
+            String listFirmName = AddressList.dropList.get(i).getName();
+            String currAddress   = addressBook.get(position).getAddress();
+            String listAddress = AddressList.dropList.get(i).getAddress();
+
+            Log.e("pickup", ""+currAddress + "-------- " +listAddress );
+            if(currFirmName.equals(listFirmName) && currAddress.equals(listAddress) ){
+                Log.e("pickup", "matched " +position);
+                finalConvertView.setAlpha(AddressList.diabledAlphaValue);
+                whichList = "Drop List";
+            }
+        }
+
+
+        //title.setText(""+position);
+
+
+
         return convertView;
+    }
+
+    private class ViewHolder{
+
+        int position;
+
     }
 }
 

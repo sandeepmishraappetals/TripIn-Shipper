@@ -14,8 +14,6 @@
             layout="@layout/header_add_address"
             android:id="@+id/address_header" />
 
-
-
         <ScrollView android:layout_height="500dp"
             android:layout_width="match_parent"
             android:layout_weight="1.29">
@@ -48,7 +46,7 @@
             android:id="@+id/Add_address"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="6dp" />
 
     </LinearLayout>
@@ -60,7 +58,8 @@
         android:background="#60000000"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="55.7dp">
+        android:layout_marginTop="55.7dp"
+        android:visibility="gone">
 
         <LinearLayout
             android:background="#ffffff"
@@ -89,7 +88,7 @@
                 android:layout_marginBottom="24dp"
                />
             <View
-                android:id="@+id/SplitLine_hor3"
+                android:id="@+id/add_view"
                 android:layout_width="match_parent"
                 android:layout_height= "2dp"
                 android:background="@color/colorAccent"
@@ -138,4 +137,63 @@
                 android:textColor="#ffffff" />
         </LinearLayout>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#56000000"
+        android:id="@+id/Alert_delet"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/card_background"
+            android:layout_marginTop="97dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="42dp"
+            android:layout_marginRight="54dp">
+            <tripin.com.tripin_shipper.widget.TextViewLatoRegular
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Are you sure you want to delete"
+                android:layout_marginTop="25dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="27.7dp"
+                android:layout_marginRight="23dp"
+                android:textColor="#4c4c4c" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="23dp"
+                android:layout_marginBottom="23dp">
+                <tripin.com.tripin_shipper.widget.UI.ButtonViewLatoBold
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/button_Cancel"
+                    android:text="Cancel"
+                    android:background="@drawable/button_selector"
+                    android:textColor="#a6a6a6"
+                    android:layout_marginLeft="37.3dp" />
+                <tripin.com.tripin_shipper.widget.UI.ButtonViewLatoBold
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/button_Delete"
+                    android:text="DELETE"
+                    android:background="@drawable/button_selector"
+                    android:layout_marginRight="37.3dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <include
+        android:id="@+id/Savealert"
+        android:layout_height="match_parent"
+       android:layout_width="match_parent"
+        layout="@layout/include_saveaddress"
+        android:visibility="gone"
+        />
    </RelativeLayout>

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,10 +34,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tripin.com.tripin_shipper.AppController;
 import tripin.com.tripin_shipper.R;
 import tripin.com.tripin_shipper.adapter.CustomListAdapter;
 import tripin.com.tripin_shipper.model.Countries;
-import tripin.com.tripin_shipper.volley.AppController;
 import tripin.com.tripin_shipper.volley.Config_URL;
 
 /**
@@ -59,6 +60,11 @@ public class Activity_state extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+        init();
+
+      }
+
+    private void init() {
         final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(this);
         Access_Token=(mSharedPreference.getString("Token", null));
         StateList(Access_Token);
@@ -74,13 +80,17 @@ public class Activity_state extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(Activity_state.this, Activity_Address_page.class);
                 startActivity(i);
+                finish();
             }
         });
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
         pDialog.setMessage("Loading...");
         pDialog.show();
-      }
+      Button  addAddress = (Button) findViewById(R.id.bt_address) ;
+        addAddress.setVisibility(View.GONE);
+    }
+
     private void StateList(final String access_token)  {
         // Tag used to cancel the request
         String tag_string_req = "State";

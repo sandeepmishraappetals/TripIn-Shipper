@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--bottom panel color-->
+    <color name="bottom_btn_bg_color">#44d3f1</color>
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#a9a9a9</color>
@@ -22,4 +24,10 @@
     <color name="white">#d8d8d8</color>
     <color name="white_two">#ffffff</color>
     <color name="silver_47">#77d8dddd</color>
+
+    <color name="divider_line_color">#60a6a6a6</color>
+    <color name="bright_cyan">#44d3f1</color>
+    <color name="greyish_brown">#4c4c4c</color>
+    <color name="dark_grey_blue_partition">#32355a</color>
+    <color name="listviewhighlighter">#2638ceed</color>
 </resources>

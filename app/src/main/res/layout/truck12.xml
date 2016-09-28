@@ -1,29 +1,51 @@
-
-
-<android.support.v4.app.FragmentTabHost
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/tabhost"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <include layout="@layout/header_add_address"></include>
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <android.support.v4.app.FragmentTabHost
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="match_parent" >
+        <include
+            android:id="@+id/truckHeader" layout="@layout/header_add_address"></include>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="@dimen/_60dp"/>
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/_60dp"/>
 
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
 
-</android.support.v4.app.FragmentTabHost>
+        <include layout="@layout/addresses_alert"
+            android:id="@+id/common_alert"/>
+
+    </android.support.v4.app.FragmentTabHost>
+
+    <tripin.com.tripin_shipper.widget.UI.ButtonViewLatoBold
+        android:id="@+id/button_confirm"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#39ceed"
+        android:text="NEXT"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:layout_margin="5dp" />
+
+</RelativeLayout>
+

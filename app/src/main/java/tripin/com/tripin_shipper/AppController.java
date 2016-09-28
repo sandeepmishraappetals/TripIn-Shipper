@@ -1,4 +1,4 @@
-package tripin.com.tripin_shipper.volley;
+package tripin.com.tripin_shipper;
 
 import android.app.Activity;
 import android.app.Application;
@@ -21,10 +21,17 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import tripin.com.tripin_shipper.Connectivity.ConnectivityReceiver;
+import tripin.com.tripin_shipper.model.AddressList;
+import tripin.com.tripin_shipper.model.AddressObj;
+import tripin.com.tripin_shipper.model.TruckCartList;
+import tripin.com.tripin_shipper.volley.LruBitmapCache;
 
 /*
 * 	We are creating a Application Singleton Object by extending Application, so it should be declared as a application in the "AndroidMainFests" file
@@ -38,6 +45,9 @@ public class AppController extends Application
 	private ImageLoader mImageLoader;
 
 	private static AppController mInstance;
+	public JSONObject orderSummaryObj;
+
+
 
 	@Override
 	public void onCreate()
@@ -48,6 +58,103 @@ public class AppController extends Application
 		VolleyLog.DEBUG = false;
 		mInstance = this;
 	}
+
+	public void createBlankOrderSummaryObject(){
+		orderSummaryObj = new JSONObject();
+
+		try {
+			orderSummaryObj.put("Consigner", new JSONObject());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addConsignerAddress(AddressObj addressObj){
+		try {
+			addressObj = AddressList.pickUpList.get(0);
+			JSONObject consignerObj = new JSONObject();
+			consignerObj.put("name", addressObj.getName());
+			consignerObj.put("address", addressObj.getAddress());
+			orderSummaryObj.put("Consigner", consignerObj);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addConsigneeAddress(AddressObj addressObj){
+
+		try {
+			addressObj = AddressList.dropList.get(0);
+			JSONObject consignerObj = new JSONObject();
+			consignerObj.put("name", addressObj.getName());
+			consignerObj.put("address", addressObj.getAddress());
+			orderSummaryObj.put("Consignee", consignerObj);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addTodayData(){
+		if(TruckCartList.getTodayList().size() > 0){
+			try {
+				if(orderSummaryObj != null){
+					orderSummaryObj.put("SelectedTodayData", TruckCartList.getTodayList());
+				}else{
+					Log.e("orderSummaryObj.", "is null");
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public void addTomorrowData(){
+		if(TruckCartList.getTomorrowList().size() > 0){
+			if(orderSummaryObj != null){
+				try {
+					orderSummaryObj.put("SelectedTomorrowData", TruckCartList.getTomorrowList());
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+	}
+
+	public void addBillingAddress(AddressObj addressObj){
+		try {
+			JSONObject consignerObj = new JSONObject();
+			consignerObj.put("name", addressObj.getName());
+			consignerObj.put("address", addressObj.getAddress());
+			orderSummaryObj.put("BillingAddress", consignerObj);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addGoods(String goodsName, String qty){
+		try {
+			JSONObject goodsObj = new JSONObject();
+			goodsObj.put("name", goodsName);
+			goodsObj.put("qty", qty);
+			orderSummaryObj.put("GoodsInf", goodsObj);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+	}
+	 public void addComment(String comment)
+	 {
+		 try {
+			 orderSummaryObj.put("commentInf", comment);
+		 } catch (JSONException e) {
+			 e.printStackTrace();
+		 }
+	 }
+
+
 
 	public static synchronized AppController getInstance()
 	{

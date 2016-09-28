@@ -78,7 +78,7 @@ public class AddressSwapPickUpAdapter extends RecyclerView.Adapter<AddressSwapPi
         holder.handleView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(holder.itemView.getAlpha() > AddressList.diabledAlphaValue){
+                if(holder.itemView.getAlpha() > AddressList.diabledAlphaValue && AddressList.allowDropSwipe){
                     if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
                         mDragStartListener.onStartDrag(holder);
                         Log.e("dropped", " touched ");
@@ -106,8 +106,10 @@ public class AddressSwapPickUpAdapter extends RecyclerView.Adapter<AddressSwapPi
         holder.textIdView.setText(""+(position + 1));
 
         if(AddressList.dropList.size() > 1 && mItems.size() == 1){
-            holder.itemView.setAlpha(AddressList.diabledAlphaValue);
+            holder.itemView.setAlpha(0.3f);
         }
+
+
     }
 
     @Override
@@ -138,7 +140,7 @@ public class AddressSwapPickUpAdapter extends RecyclerView.Adapter<AddressSwapPi
      * "handle" view that initiates a drag event when touched.
      */
     public static class ItemViewHolder extends RecyclerView.ViewHolder implements
-            ItemTouchHelperViewHolder {
+            ItemTouchHelperViewHolder, View.OnLongClickListener {
 
         public final TextView textView;
         public final TextView addressTextView;
@@ -150,7 +152,9 @@ public class AddressSwapPickUpAdapter extends RecyclerView.Adapter<AddressSwapPi
             textView = (TextView) itemView.findViewById(R.id.text);
             addressTextView = (TextView) itemView.findViewById(R.id.addressText);
             handleView = (ViewGroup) itemView.findViewById(R.id.handle);
-            textIdView  = (TextView) itemView.findViewById(R.id.textId);
+            textIdView  = (TextView) itemView.findViewById(R.id.textIdGreen);
+            textIdView.setVisibility(View.VISIBLE);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -164,6 +168,32 @@ public class AddressSwapPickUpAdapter extends RecyclerView.Adapter<AddressSwapPi
             Log.e("itemCleared", "item has dropped");
            mainActivity.addressesFragment.setVisiblityOfBottomBtns(1);
             mainActivity.addressesFragment.listPickUpUpdated(mItems);
+        }
+
+          /*holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.e("deleting", "is deleting " + position);
+                AddressList.pickUpList.remove(position);
+                mainActivity.addressesFragment.showOriginalContainers();
+                mainActivity.addressesFragment.checkUserInputs();
+                return true;
+            }
+        });*/
+
+        @Override
+        public boolean onLongClick(View v) {
+            Log.e("deleting", "is deleting " + getPosition());
+           // AddressList.pickUpList.remove(getPosition());
+           // mainActivity.addressesFragment.showOriginalContainers();
+            //mainActivity.addressesFragment.checkUserInputs();
+
+            //mainActivity.addressesFragment.cheapestRoutePickUpAddressDeleted(getPosition());
+            mainActivity.addressesFragment.cheapestRouteDeleteType = 0;
+            mainActivity.addressesFragment.cheapestRouteDeletePosition = getPosition();
+            mainActivity.addressesFragment.setAlertDialog(3, "DELETE ADDRESS", "DELETE", "CANCEL");
+
+            return false;
         }
     }
 }

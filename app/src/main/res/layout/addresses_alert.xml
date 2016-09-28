@@ -2,7 +2,7 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="#20000000"
-        android:padding="20dp"
+        android:padding="50dp"
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,42 +15,46 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_marginBottom="20dp"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
-                    android:textColor="@android:color/darker_gray"
+                <tripin.com.tripin_shipper.widget.TextViewLatoRegular
+                    android:textColor="@color/Add_address_text"
                     android:id="@+id/heading"
-                    android:layout_margin="20dp"
+                    android:layout_margin="10dp"
                     android:textStyle="bold"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/SMALL"
                     android:text="Delete Address?"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
-                    android:layout_margin="20dp"
+                    android:layout_margin="10dp"
                     android:orientation="horizontal"
                     android:weightSum="1.0"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <TextView
+
+                    <tripin.com.tripin_shipper.widget.TextViewLatoBold
+                        android:id="@+id/negativeBtn"
+                        android:gravity="center"
+                        android:textColor="@color/greyish"
+                        android:text="YES"
+                        android:layout_weight="0.5"
+                        android:textSize="@dimen/SMALL"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <tripin.com.tripin_shipper.widget.TextViewLatoBold
                         android:id="@+id/positiveBtn"
                         android:gravity="center"
+                        android:textColor="@color/greyish"
                         android:text="CANCEL"
-                        android:textSize="20dp"
+                        android:textSize="@dimen/SMALL"
                         android:layout_weight="0.5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 
-                    <TextView
-                        android:id="@+id/negativeBtn"
-                        android:gravity="center"
-                        android:text="YES"
-                        android:layout_weight="0.5"
-                        android:textSize="20dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
             </LinearLayout>

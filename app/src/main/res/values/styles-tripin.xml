@@ -83,9 +83,10 @@
     </style>
     <style name="AddressGrayHintText" parent="TextAppearance.AppCompat">
         <item name="android:textColorHint">@color/colorGrey</item>
-        <item name="colorControlActivated">@color/colorGrey</item>
-        <item name="colorControlHighlight">@color/colorGrey</item>
-        <item name="android:textSize">13sp</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="android:textSize">15sp</item>
     </style>
     <style name="AddressBlueHintText" parent="TextAppearance.AppCompat">
         <item name="android:textColorHint">@color/colorPrimary</item>

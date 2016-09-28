@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import tripin.com.tripin_shipper.volley.AppController;
+import tripin.com.tripin_shipper.AppController;
 
 /**
  * Created by Android on 07/09/16.

@@ -25,7 +25,8 @@
             android:textSize="15sp"
             android:textColor="@color/Add_address_text"
             android:background="@color/transparant"
-            android:paddingBottom="5dp" />
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/name_address"
@@ -49,7 +50,8 @@
             android:textSize="15sp"
             android:textColor="@color/Add_address_text"
             android:background="@color/transparant"
-            android:paddingBottom="5dp" />
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
     </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,7 +92,8 @@
                     android:inputType="text"
                     android:textColor="@color/Add_address_text"
                     android:background="@drawable/edittext_bottom_line"
-                    android:paddingBottom="5dp" />
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -112,13 +115,18 @@
                     android:inputType="number"
                     android:textColor="@color/Add_address_text"
                     android:background="@drawable/edittext_bottom_line"
-                    android:paddingBottom="5dp" />
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/timeRl">
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/loading_time"
+        android:id="@+id/loading_time_InputLayout"
         style="@style/AddressGrayHintText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -138,8 +146,10 @@
 
             android:textSize="15sp"
             android:background="@color/transparant"
-            android:paddingBottom="5dp" />
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
     </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
     <ImageView
         android:layout_width="14dp"
         android:layout_height="14dp"
@@ -147,8 +157,8 @@
         android:src="@mipmap/rectangle_2"
         android:foregroundGravity="center_vertical"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/state"
-        android:layout_alignEnd="@+id/state"
+        android:layout_alignRight="@+id/goodQty"
+        android:layout_alignEnd="@+id/goodQty"
         android:layout_marginBottom="5.5dp"
         android:layout_marginRight="20dp"
         android:layout_gravity="right"

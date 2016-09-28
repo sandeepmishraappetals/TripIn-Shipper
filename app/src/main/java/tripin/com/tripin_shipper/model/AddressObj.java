@@ -14,7 +14,7 @@ public class AddressObj implements Serializable {
 
 
 
-    public AddressObj(int i, String name, String address,String lat, String lon){
+    public AddressObj(int id, String name, String address,String lat, String lon){
         setId(id);
         setName(name);
         setAddress(address);

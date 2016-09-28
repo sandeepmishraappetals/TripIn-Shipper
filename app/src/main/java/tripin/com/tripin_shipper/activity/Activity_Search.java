@@ -19,7 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import tripin.com.tripin_shipper.R;
-import tripin.com.tripin_shipper.volley.AppController;
+import tripin.com.tripin_shipper.AppController;
 
 /**
  * Created by Android on 24/08/16.

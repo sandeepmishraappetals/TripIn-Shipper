@@ -44,34 +44,24 @@ public class Config_URL
 	//User Address Book
 	public static String URL_ADDRESS_BOOK = base_URL+"settings/load_address_book";
 
-/*
-	private static final String URL_JSON_OBJECT = "http://api.androidhive.info/volley/person_object.json";
-	private static final String URL_JSON_ARRAY = "http://api.androidhive.info/volley/person_array.json";
-	private static final String URL_STRING_REQ = "http://api.androidhive.info/volley/string_response.html";
-	private static final String URL_IMAGE = "http://api.androidhive.info/volley/volley-image.jpg";
+	// Truck Selection
+	public  static String URL_TRUCK_SELECTION_PRICING = base_URL+"book/load_truck_selection";
 
-	//If you need any parameter passed with the URL (GET) - U need to modify this functions
-	public static String get_JSON_Object_URL()
-	{
-		return URL_JSON_OBJECT;
-	}
+	// Goods
+	public  static String URL_GOODS = base_URL+"settings/load_goods";
 
-	public static String get_JSON_Array_URL()
-	{
-		return URL_JSON_ARRAY;
-	}
+	// chepest Route
+	public  static String URL_CHEPEST_ROUTE = base_URL+"/settings/get_shortest_path";
 
-	public static String get_String_URL(String Input)
-	{
-		if(Input.length()>0) {
-			return Input;
-		}
-		return URL_STRING_REQ;
-	}
+	// get truck count
+	public  static String URL_TRUCKCOUNT = base_URL+"book/load_avaiable_trucks_count";
 
-	public static String get_Image_URL()
-	{
-		return URL_IMAGE;
-	}
-	*/
+	// Truck Selection NEW
+	public  static String URL_TRUCK_SELECTION_PRICING_NEW = base_URL+"book/load_truck_selection_new";
+
+	//Truck Allocation
+	public  static String URL_TRUCK_ALLOCATION = base_URL+"book/truck_allocate";
+
+	//Address delete
+	public  static String URL_ADDRESS_DELETE = base_URL+"settings/delete_address";
 }

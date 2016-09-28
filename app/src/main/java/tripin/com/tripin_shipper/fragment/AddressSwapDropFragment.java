@@ -39,7 +39,7 @@ import tripin.com.tripin_shipper.model.AddressList;
 public class AddressSwapDropFragment extends Fragment implements OnStartDragListener {
 
     private ItemTouchHelper mItemTouchHelper;
-    private AddressSwapDropAdapter adapter;
+    public AddressSwapDropAdapter adapter;
     private RecyclerView recyclerView;
 
 
@@ -61,7 +61,7 @@ public class AddressSwapDropFragment extends Fragment implements OnStartDragList
         nameList.add("four");
         nameList.add("five");
         nameList.add("Six");*/
-        adapter = new AddressSwapDropAdapter(getActivity(), this, AddressList.dropList);
+        adapter = new AddressSwapDropAdapter(getActivity(), this, AddressList.cheapestRouteDropList);
 
         recyclerView = (RecyclerView) view;
         recyclerView.setHasFixedSize(true);

@@ -17,8 +17,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="20dp"
+    android:layout_height="75dp"
     android:layout_marginRight="0dp"
     android:clickable="true"
     android:focusable="true">
@@ -39,15 +38,42 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.2">
 
-                <TextView
-                    android:id="@+id/textId"
+                <View
+                    android:id="@+id/vertLine1"
+                    android:visibility="gone"
+                    android:layout_width="1dp"
+                    android:layout_height="18dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/greyish_brown" />
+
+                <tripin.com.tripin_shipper.widget.TextViewLatoRegular
+                    android:layout_below="@+id/vertLine1"
+                    android:id="@+id/textIdGreen"
                     android:gravity="center"
+                    android:textSize="@dimen/SMALL"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:background="@drawable/circle_shape_green"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@android:color/darker_gray" />
+                    android:textColor="@android:color/white" />
+
+                <tripin.com.tripin_shipper.widget.TextViewLatoRegular
+                    android:id="@+id/textIdRed"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textSize="@dimen/SMALL"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/circle_shape_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white" />
 <!--
                 <LinearLayout
                     android:layout_below="@+id/textId"
@@ -55,6 +81,15 @@
                     android:background="@android:color/darker_gray"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"></LinearLayout>-->
+
+                <View
+                    android:id="@+id/vertLine2"
+                    android:visibility="gone"
+                    android:layout_width="1dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/textIdRed"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/greyish_brown" />
 
 
             </RelativeLayout>
@@ -64,36 +99,47 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8">
 
-                <TextView
+                <tripin.com.tripin_shipper.widget.TextViewLatoBold
                     android:id="@+id/text"
+                    android:textSize="@dimen/SMALL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textColor="#4c4c4c" />
 
-                <TextView
+
+
+                <tripin.com.tripin_shipper.widget.TextViewLatoRegular
                     android:id="@+id/addressText"
                     android:layout_below="@+id/text"
+                    android:textSize="@dimen/SMALL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@android:color/black" />
+                    android:textColor="#878787" />
 
-                <LinearLayout
+                <View
+                    android:id="@+id/SplitLine_hor2"
+                    android:layout_width="match_parent"
+                    android:layout_height= "1dp"
+                    android:background="@color/divider_line_color"
+                    android:layout_below="@+id/addressText"
+
+                    android:layout_centerHorizontal="true" />
+
+                <!--<LinearLayout
                     android:layout_below="@+id/addressText"
                     android:layout_alignLeft="@+id/text"
                     android:background="@android:color/darker_gray"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"></LinearLayout>
+                    android:layout_height="1dp"></LinearLayout>-->
+
+
             </RelativeLayout>
-
         </LinearLayout>
-
-
     </RelativeLayout>
-
 </RelativeLayout>
 
     <!--

@@ -57,6 +57,16 @@
     <dimen name="font_28sp">28sp</dimen>
     <dimen name="font_30sp">30sp</dimen>
 
+    <dimen name="MINI">12sp</dimen>
+    <dimen name="SMALL">14sp</dimen>
+    <dimen name="MEDIUM">16sp</dimen>
+    <dimen name="LARGE">20sp</dimen>
+    <dimen name="XLARGE">26sp</dimen>
 
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="profile_width">75dp</dimen>
+    <dimen name="profile_height">75dp</dimen>
 
 </resources>

@@ -106,7 +106,8 @@
                 android:inputType="textPassword"
                 android:hint="@string/password"
                 android:layout_margin="10dp"
-                android:padding="15dp" />
+                android:padding="15dp"
+                android:textColor="@android:color/secondary_text_dark" />
 </android.support.design.widget.TextInputLayout>
             <LinearLayout
                 android:orientation="vertical"

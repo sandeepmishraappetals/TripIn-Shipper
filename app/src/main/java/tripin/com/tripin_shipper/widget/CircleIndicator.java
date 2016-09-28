@@ -14,11 +14,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import tripin.com.tripin_shipper.R;
-import tripin.com.tripin_shipper.widget.holder.ShapeHolder;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import tripin.com.tripin_shipper.R;
+import tripin.com.tripin_shipper.widget.holder.ShapeHolder;
 
 /**
  * Created by xiayong on 2015/9/29.
@@ -41,7 +41,8 @@ public class CircleIndicator extends View {
     //default value
     private final int DEFAULT_INDICATOR_RADIUS = 5;
     private final int DEFAULT_INDICATOR_MARGIN = 20;
-    private final int DEFAULT_INDICATOR_BACKGROUND = Color.TRANSPARENT;
+   // private final int DEFAULT_INDICATOR_BACKGROUND = Color.TRANSPARENT;
+   private final int DEFAULT_INDICATOR_BACKGROUND = Color.WHITE;
     private final int DEFAULT_INDICATOR_SELECTED_BACKGROUND = Color.GRAY;
     private final int DEFAULT_INDICATOR_LAYOUT_GRAVITY = Gravity.CENTER.ordinal();
     private final int DEFAULT_INDICATOR_MODE = Mode.SOLO.ordinal();

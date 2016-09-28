@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite">
@@ -16,7 +17,7 @@
             android:layout_marginTop="11.8dp">
          <tripin.com.tripin_shipper.widget.TextViewLatoRegular
              android:layout_width="150dp"
-             android:layout_height="23dp"
+             android:layout_height="24dp"
              android:id="@+id/state"
              android:layout_gravity="center_horizontal"
              android:inputType="text"
@@ -41,15 +42,15 @@
              android:src="@mipmap/arrow"
              android:foregroundGravity="center_vertical"
              android:layout_alignParentTop="true"
-             android:layout_alignRight="@+id/state"
-             android:layout_alignEnd="@+id/state"
+             android:layout_alignRight="@+id/goodQty"
+             android:layout_alignEnd="@+id/goodQty"
              android:layout_marginBottom="5.5dp"
              android:layout_marginLeft="144dp"
              android:layout_marginTop="37.5dp"
              android:layout_marginRight="10dp" />
             <tripin.com.tripin_shipper.widget.TextViewLatoRegular
                 android:layout_width="150dp"
-                android:layout_height="23dp"
+                android:layout_height="24dp"
                 android:id="@+id/city"
                 android:layout_gravity="center_horizontal"
                 android:inputType="text"
@@ -62,12 +63,13 @@
                 android:textIsSelectable="false"
                 android:paddingTop="2dp"
                 android:paddingRight="2dp"
-                android:layout_alignTop="@+id/state"
+                android:layout_alignTop="@+id/goodQty"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginLeft="180dp"
                 android:text="@string/city"
-                android:layout_marginRight="19.5dp" />
+                android:layout_marginRight="19.5dp"
+                android:layout_marginTop="35.5dp" />
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp"
@@ -106,12 +108,12 @@
                 android:foregroundGravity="left"
                 android:gravity="left"
                 android:textColor="@color/Add_address_text"
-                android:background="#0000"
+                android:background="@color/transparant"
                 android:paddingBottom="5dp"
-/>
+                android:paddingTop="5dp" />
         </android.support.design.widget.TextInputLayout>
             <View
-                android:id="@+id/SplitLine_hor3"
+                android:id="@+id/add_view"
                 android:layout_width="match_parent"
                 android:layout_height= "2dp"
                 android:background="@color/colorAccent"

@@ -19,7 +19,7 @@ import java.util.List;
 import tripin.com.tripin_shipper.R;
 import tripin.com.tripin_shipper.activity.Activity_Address_page;
 import tripin.com.tripin_shipper.model.Countries;
-import tripin.com.tripin_shipper.volley.AppController;
+import tripin.com.tripin_shipper.AppController;
 
 /**
  * Created by SUMEET on 03-09-2016.
@@ -61,7 +61,7 @@ public class CustomListAdapter extends BaseAdapter {
 
         TextView title = (TextView) convertView.findViewById(R.id.product_name);
         TextView rating = (TextView) convertView.findViewById(R.id.tv2);
-
+        View rowView = (View) convertView.findViewById(R.id.rowView);
         // getting movie data for the row
       Countries m = movieItems.get(position);
 
@@ -70,6 +70,12 @@ public class CustomListAdapter extends BaseAdapter {
         title.setText((CharSequence) m.getName());
 
         Log.e("@adaper-name", String.valueOf(m.getName()));
+        Log.e("@adaper-name", String.valueOf(m.getCity_name()) + " "+ getCount());
+      /*  if (position == 2)
+        {
+            rowView.setVisibility(View.VISIBLE);
+
+        }*/
 
 // Listen for ListView Item Click
         convertView.setOnClickListener(new View.OnClickListener() {

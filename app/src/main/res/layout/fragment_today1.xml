@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ffffff">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,7 +13,8 @@
         android:id="@+id/textView12"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="204dp"
@@ -18,34 +22,210 @@
         android:id="@+id/imageView6"
         android:layout_below="@+id/textView12"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/imageView6">
-
-    <NumberPicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/np2"
-        android:layout_alignTop="@+id/np1"
-        android:layout_toRightOf="@+id/np1"
-        android:layout_toEndOf="@+id/np1" />
+        android:src="@drawable/dummy_truck"
+        android:visibility="visible" />
+  <!--  <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sliding_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoPanelHeight="68dp"
+        sothree:umanoShadowHeight="4dp"
+        sothree:umanoParallaxOffset="100dp"
+        sothree:umanoDragView="@+id/dragView"
+        sothree:umanoOverlay="true"
+        sothree:umanoScrollableView="@+id/main">-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imageView6">
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/txt_capacity"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/relativeLayout">
 
     <NumberPicker
         android:id="@+id/np"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <NumberPicker
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/np2"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/np1"
+        android:layout_toEndOf="@+id/np1" />
+
+    <NumberPicker
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:id="@+id/np1"
-        android:layout_alignTop="@+id/np"
-        android:layout_toRightOf="@+id/np"
-        android:layout_toEndOf="@+id/np" />
-</LinearLayout>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
+
+        <tripin.com.tripin_shipper.widget.TextViewLatoHeavy
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CAPACITY"
+            android:id="@+id/txt_capacity"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="31dp"
+            android:textColor="#39ceed"
+            android:textSize="12.7dp"
+            android:layout_marginBottom="3.3dp"
+            android:layout_marginTop="21.7dp" />
+
+        <tripin.com.tripin_shipper.widget.TextViewLatoHeavy
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BODY"
+            android:id="@+id/text_body"
+            android:layout_above="@+id/relativeLayout"
+            android:layout_centerHorizontal="true"
+            android:textColor="#39ceed"
+            android:textSize="12.7dp"
+            android:layout_marginBottom="3.3dp" />
+
+        <tripin.com.tripin_shipper.widget.TextViewLatoHeavy
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LENGTH"
+            android:id="@+id/text_length"
+            android:layout_above="@+id/relativeLayout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="42dp"
+            android:layout_marginEnd="42dp"
+            android:textColor="#39ceed"
+            android:textSize="12.7dp"
+            android:layout_marginBottom="3.3dp" />
+
+        <tripin.com.tripin_shipper.widget.UI.ButtonViewLatoBold
+            android:layout_width="fill_parent"
+            android:layout_height="36dp"
+            android:text="ADD THIS TRUCK"
+            android:id="@+id/button_addtruck"
+            android:layout_marginBottom="75dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_rectangle_hollow"
+            android:layout_marginLeft="69dp"
+            android:layout_marginRight="68dp"
+            android:textSize="@dimen/font_16sp"
+            android:textColor="#39ceed" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/truck_cart"
+            android:background="@drawable/shape"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="120.5 mt"
+                android:id="@+id/textView13"
+                android:layout_gravity="center"
+                android:layout_alignBottom="@+id/textView14"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15"
+                android:gravity="center"
+                android:id="@+id/textView14"
+                android:layout_gravity="center"
+                android:background="@drawable/circle_shape_white"
+                android:textSize="15sp"
+                android:textColor="#39ceed"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/text_total"
+                android:layout_toEndOf="@+id/text_total"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOTAL"
+                android:id="@+id/text_total"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ffffff"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
+                android:layout_alignBottom="@+id/textView14"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="82,000"
+                android:id="@+id/textView15"
+                android:layout_alignTop="@+id/text_total"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:textColor="#ffffff" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView7"
+                android:src="@drawable/ar"
+                android:adjustViewBounds="true"
+                android:layout_above="@+id/textView15"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <!--</com.sothree.slidinguppanel.SlidingUpPanelLayout>-->
+
+  <!--  <android.support.v7.widget.CardView
+        android:padding="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >-->
+
+        <RelativeLayout
+
+            android:padding="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/capacity_pop"
+            android:background="#99000000"
+            android:visibility="gone">
+            <ListView android:id="@+id/list" android:layout_width="wrap_content"
+
+                android:background="@drawable/card_background"
+                android:layout_height="700dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp" />
+        </RelativeLayout>
+<!--
+
+    </android.support.v7.widget.CardView>
+-->
+
+
 </RelativeLayout>

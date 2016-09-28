@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.design.widget.TextInputLayout;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -32,18 +34,21 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
+import tripin.com.tripin_shipper.AppController;
 import tripin.com.tripin_shipper.R;
 import tripin.com.tripin_shipper.helper.SessionManager;
 import tripin.com.tripin_shipper.model.AddressBook;
+import tripin.com.tripin_shipper.model.AddressList;
 import tripin.com.tripin_shipper.model.User;
-import tripin.com.tripin_shipper.volley.AppController;
 import tripin.com.tripin_shipper.volley.Config_URL;
 
 /**
@@ -77,6 +82,7 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
     private TextView Loading_from;
     private TextView Loading_to;
     private EditText Loading_EditText;
+    private ImageButton ImbtTrash;
 
     //  private EditText
     private String Access_Token;
@@ -103,6 +109,10 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
     String order_address_id, address_id;
     //end edit page
     private int mode;
+    private ViewGroup Alert_Trash, alertSave;
+    private RelativeLayout LoadingTimeRl;
+    Bundle bundle ;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,10 +137,21 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
         // Get the results of country
         state_id = i.getStringExtra("state_id");
         //    City_name = i.getStringExtra("city_name");
-        state_name = (mSharedPreference.getString("State", null));
+        /*if (state_name!=null)
+        {*/
+            state_name = (mSharedPreference.getString("State", null));
+   //     }
+
         City_name = (mSharedPreference.getString("city_name", null));
-        address_id = i.getStringExtra("address_id");
-        order_address_id = i.getStringExtra("address");
+        if (address_id!=null )
+        {
+            address_id = i.getStringExtra("AddressId");
+        }
+        else {
+            address_id = "0";
+        }
+
+        order_address_id =  "0"/*i.getStringExtra("address")*/;
         //  City_Id = i.getStringExtra("city_id");
         View page1 = findViewById(R.id.page1); // root View id from that link
         View page2 = findViewById(R.id.page2); // id of a view contained in the included file
@@ -140,8 +161,8 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
         mTextInputLayoutState = (TextInputLayout) page1.findViewById(R.id.input_layout_state);
         mTextInputLayoutCity = (TextInputLayout) page1.findViewById(R.id.input_layout_city);
         mTextInputLayoutSurvey = (TextInputLayout) page1.findViewById(R.id.input_layout_survey);
-      //  mTextInputLayoutLoading = (TextInputLayout) page2.findViewById(R.id.loading_time);
-        Loadin = (TextInputLayout) page2.findViewById(R.id.loading_time);
+        mTextInputLayoutLoading = (TextInputLayout) page2.findViewById(R.id.loading_time_InputLayout);
+     //   Loadin = (TextInputLayout) page2.findViewById(R.id.loading_time);
        /* state = (EditText) findViewById(R.id.state);*/
         city = (TextView) page1.findViewById(R.id.city);
         survey = (EditText) page1.findViewById(R.id.survey);
@@ -168,11 +189,20 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
         activity_login_header = findViewById(R.id.include);
         final SharedPreferences mSharedPreference1 = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         Access_Token = (mSharedPreference1.getString("Token", null));
+        ImbtTrash = (ImageButton) header.findViewById(R.id.imageButton_trash);
             state.setOnClickListener(this);
+
             city.setOnClickListener(this);
-       // mTextInputLayoutLoading.setOnClickListener(this);
+        mTextInputLayoutLoading.setOnClickListener(this);
+        LoadingTimeRl = (RelativeLayout)page2.findViewById(R.id.timeRl) ;
+        LoadingTimeRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadingTimePopUp();
+            }
+        });
       //  Loadin.setOnClickListener(this);
-        Loadin.setOnTouchListener(this);
+      //  Loadin.setOnTouchListener(this);
             back.setOnClickListener(this);
             timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
             timePicker1.setIs24HourView(false);
@@ -186,50 +216,240 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
             int convertedWidth = 1090 * 100/100;
             int convertedHeight= 1920 * 100/100;
             timePopup.getLayoutParams().height = convertedHeight;
+Alert_Trash = (ViewGroup) findViewById(R.id.Alert_delet);
+        alertSave = (ViewGroup) findViewById(R.id.Savealert);
+        final Button delete = (Button) findViewById(R.id.button_Delete);
+        final Button cancel = (Button) findViewById(R.id.button_Cancel);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete.setBackgroundColor(getResources().getColor(R.color.aqua_marine));
+                deleteAddress();
+            }
+        });
 
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelAddressAlert();
+            }
+        });
 
+        ImbtTrash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Alert_Trash.setVisibility(View.VISIBLE);
+
+            }
+        });
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
         if(mode == 1){
             Bundle bundle = getIntent().getBundleExtra("addressBundle");
             AddressBook addressBook = (AddressBook) bundle.getSerializable("obj");
+            ImbtTrash.setVisibility(View.VISIBLE);
             assignPrefilledData(addressBook);
         }
             add_address.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String state_name = state.getText().toString().trim(); //Mandatory
-                    String city_name = city.getText().toString(); //Mandatory
-                    String survey_name = survey.getText().toString().trim(); //Mandatory
-                    String name_firm = Name_of_firm.getText().toString().trim(); //Mandatory
-                    String address = Address.getText().toString().trim(); //Mandatory
-                    String landmark = Landmark.getText().toString().trim();
-                    String pincode = Pincode.getText().toString().trim();
-                    loading_from = "from"+time1;//Loading_from.getText().toString().trim(); //Mandatory
-                    loading_to = "To"+time2;//Loading_to.getText().toString().trim();  //Mandatory
-                    String name_contact = Contact_Name.getText().toString().trim();  //Mandatory
-                    String mobile = Mobile.getText().toString().trim(); //Mandatory
-                    String landline = Landline.getText().toString().trim();
-                    String email = Email_id.getText().toString().trim();
-                    String firmtype = "0"; //need to work with blling address
-                    if (state_name == null && city_name.isEmpty() && survey_name.isEmpty() && name_firm.isEmpty() && address.isEmpty() && loading_from.isEmpty()
-                            && loading_to.isEmpty() && name_contact.isEmpty() && mobile.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "Please fill proper input", Toast.LENGTH_SHORT).show();
-                    } else {
-                        add_address.setBackgroundResource(R.color.aqua_marine);
-                        if (mode == 1){
-                            SaveAdd(Access_Token, state_name, city_name, survey_name, name_firm, address, landline, pincode, landmark, loading_to, loading_from, name_contact, mobile, email,firmtype);
 
-                        }
-                        else{
-                            SaveAdd1(Access_Token, state_name, city_name, survey_name, name_firm, address, landline, pincode, landmark, loading_to, loading_from, name_contact, mobile, email,firmtype);
-
-                        }
-                    }
+                    addAddress();
                 }
             });
+
+        mTextInputLayoutLoading.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                   Log.e("clicked", "has clicked");
+                }
+            }
+        });
             Contact.setOnClickListener(this);
+
+       setPrefillEntries();
     }
 
+    private void setPrefillEntries(){
+        state.setText("Gujarat");
+        city.setText("Vadodara");
+        survey.setText("djks");
+        Name_of_firm.setText("sssss");
+        Address.setText("sdsddss c ssd");
+        Landmark.setText("bhau chi galli");
+        Pincode.setText("");
+        Contact_Name.setText("Test21");
+        Mobile.setText("9702576304");
+        Landline.setText("");
+        Email_id.setText("sanjeev@test1.com");
+    }
+
+    private void addAddress() {
+
+        String state_name = state.getText().toString().trim(); //Mandatory
+        String city_name = city.getText().toString(); //Mandatory
+        String survey_name = survey.getText().toString().trim(); //Mandatory
+        String name_firm = Name_of_firm.getText().toString().trim(); //Mandatory
+        String address = Address.getText().toString().trim(); //Mandatory
+        String landmark = Landmark.getText().toString().trim();
+        String pincode = Pincode.getText().toString().trim();
+        loading_from = /*"from"+*/time1;//Loading_from.getText().toString().trim(); //Mandatory
+        loading_to = /*"To"+*/time2;//Loading_to.getText().toString().trim();  //Mandatory
+        String name_contact = Contact_Name.getText().toString().trim();  //Mandatory
+        String mobile = Mobile.getText().toString().trim(); //Mandatory
+        String landline = Landline.getText().toString().trim();
+        String email = Email_id.getText().toString().trim();
+        String firmtype = "0"; //need to work with blling address
+        String order_add_id = "0";
+        if (state_name == null && city_name.isEmpty() && survey_name.isEmpty() && name_firm.isEmpty() && address.isEmpty() && loading_from.isEmpty()
+                && loading_to.isEmpty() && name_contact.isEmpty() && mobile.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please fill proper input", Toast.LENGTH_SHORT).show();
+        } else {
+            add_address.setBackgroundResource(R.color.aqua_marine);
+            if (mode == 1){
+                SaveAdd(Access_Token, state_name, city_name, survey_name, name_firm, address, landline, pincode, landmark, loading_to, loading_from, name_contact, mobile, email,firmtype, order_add_id,address_id);
+
+            }
+            else{
+                SaveAdd1(Access_Token, state_name, city_name, survey_name, name_firm, address, landline, pincode, landmark, time1, time2, name_contact, mobile, email,firmtype, order_address_id, address_id);
+
+            }
+        }
+
+    }
+
+
+    String user_id = "28";
+   // String address_ID = "95";
+    private void deleteAddress() {
+        deleteAddressAPI(Access_Token,user_id,address_id);
+        Log.e("@Delete", "Click");
+        Alert_Trash.setVisibility(View.GONE);
+    }
+
+    private void deleteAddressAPI(String access_token, final String user_id, final String address_id) {
+
+            if (AppController.getInstance().isConnected(this))
+            {
+                // Tag used to cancel the request
+                String tag_string_req = "req_deleteAddress";
+
+             /*   pDialog.setMessage("DeleteAddress in ...");
+                showDialog();*/
+
+                StringRequest strReq = new StringRequest(Request.Method.POST,
+                        Config_URL.URL_ADDRESS_DELETE, new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "DeleteAddress Response: " + response.toString());
+                    //    hideDialog();
+
+                        try {
+
+                            JSONObject jObj = new JSONObject(response);
+                            //  boolean error = jObj.getBoolean("error");
+                            String error = jObj.getString("message");
+                            int status = jObj.getInt("status");
+
+                            // Check for error node in json
+                  /*  if (error!=null)*/
+                            if ( status == 1)
+                            {
+                                String errorMsg = jObj.getString("message");
+                                Toast.makeText(getApplicationContext(),
+                                        errorMsg, Toast.LENGTH_LONG).show();
+                                Intent addressBook = new Intent(getApplicationContext(), Activity_AddressBook.class);
+                                startActivity(addressBook);
+                                finish();
+                            } else {
+                                // Error in login. Get the error message
+                                String errorMsg = jObj.getString("message");
+                                Toast.makeText(getApplicationContext(),
+                                        errorMsg, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            // JSON error
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG, "Oauth Error: " + error.getMessage());
+               /* Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();*/
+                        // As of f605da3 the following should work
+                        NetworkResponse response = error.networkResponse;
+                        if (error instanceof ServerError && response != null) {
+                            try {
+                                String res = new String(response.data,
+                                        HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                                // Now you can use any deserializer to make sense of data
+                                JSONObject obj = new JSONObject(res);
+                            } catch (UnsupportedEncodingException e1) {
+                                // Couldn't properly decode data to string
+                                e1.printStackTrace();
+                            } catch (JSONException e2) {
+                                // returned data is not JSONObject?
+                                e2.printStackTrace();
+                            }
+                        }
+                    }
+                }) {
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        // Posting parameters to login url
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("tag", "login");
+                        params.put("address_id", address_id);
+                        params.put("user_id", user_id);
+                        params.put("access_token",Access_Token);
+Log.e("DEleteParam", params.toString());
+                        return params;
+                    }
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+
+                        return headers;
+                    }
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json";
+                    }
+                };
+                strReq.setRetryPolicy(new DefaultRetryPolicy(60000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                // Adding request to request queue
+                AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+            }
+
+        }
+
+       /* private void showDialog() {
+            if (!pDialog.isShowing())
+                pDialog.show();
+        }
+
+        private void hideDialog() {
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+        }*/
+
+
+    private void cancelAddressAlert() {
+        Alert_Trash.setVisibility(View.GONE);
+    }
     private void assignPrefilledData(AddressBook addressBook){
             Log.e("mode", "" + addressBook.getCity() + addressBook.getAddress_id());
         String state_name = null;
@@ -249,24 +469,39 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
             state_name  = addressBook.getState().toString().trim(); //Mandatorys
             state.setText(state_name);
         }
+        else {
+            Toast.makeText(this, "State Error", Toast.LENGTH_SHORT).show();
+        }
         if(!addressBook.getCity().toString().equals(null)){
              city_name = addressBook.getCity().toString(); //Mandatory
             city.setText(city_name);
+        }
+        else {
+            Toast.makeText(this, "City Error", Toast.LENGTH_SHORT).show();
         }
         if (!addressBook.getSurvey_no().toString().equals(null))
         {
             survey_name = addressBook.getSurvey_no().toString().trim(); //Mandatory
             survey.setText(survey_name);
         }
+        else {
+            Toast.makeText(this, "Survey Error", Toast.LENGTH_SHORT).show();
+        }
         if (!addressBook.getFirm_name().toString().equals(null))
         {
             name_firm = addressBook.getFirm_name().toString().trim(); //Mandatory
             Name_of_firm.setText(name_firm);
         }
+        else {
+            Toast.makeText(this, "Firm Name Error", Toast.LENGTH_SHORT).show();
+        }
         if (!addressBook.getAddress().toString().equals(null))
         {
             address = addressBook.getAddress().toString().trim(); //Mandatory
             Address.setText(address);
+        }
+        else {
+            Toast.makeText(this, "Address Error", Toast.LENGTH_SHORT).show();
         }
       try {
           if (!addressBook.getLandmark().toString().equals(null)) {
@@ -289,6 +524,9 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
                Loading_from.setText(L_from);
 
            }
+           else {
+               Toast.makeText(this, "Loading Time Error", Toast.LENGTH_SHORT).show();
+           }
        }
        catch (Exception ex)
        {
@@ -309,23 +547,29 @@ public class Activity_Address_page extends Activity implements View.OnClickListe
             name_contact = addressBook.getName_of_person().toString().trim();
             Contact_Name.setText(name_contact);
         }
+        else {
+            Toast.makeText(this, "Contact Name Error", Toast.LENGTH_SHORT).show();
+        }
 try {
     if (!addressBook.getMobile().toString().equals(null)) {
         mobile = addressBook.getMobile().toString().trim();
         Mobile.setText(mobile);
+    }
+    else {
+        Toast.makeText(this, "Mobile Error", Toast.LENGTH_SHORT).show();
     }
 }
 catch (Exception ex)
 {
     ex.toString();
 }
-        String firmtype = "0";
+     //   String firmtype = "0";
 
     }
     private void SaveAdd1(final String access_token, final String state_name, final String city_name, final String survey_name,
                           final String name_firm, final String address, final String landline, final String pincode,
                           final String landmark, final String loading_to, final String loading_from,
-                          final String name_contact, final String mobile, final String email, final String firmType) {
+                          final String name_contact, final String mobile, final String email, final String firmType, final String order_address_id, final String address_id) {
 
         // Tag used to cancel the request
         String tag_string_req = "req_saveAddress";
@@ -338,7 +582,7 @@ catch (Exception ex)
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
+                Log.d(TAG, "SAving Address Response: " + response.toString());
                 //        hideDialog();
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -350,16 +594,32 @@ catch (Exception ex)
                         JSONObject data = jObj.getJSONObject("data");
                         String lat = data.optString("lat");
                         String lng = data.optString("lng");
-                        String address_id = data.optString("address_id");
-                        String order_address_id = data.optString("order_address_id");
+                        if (data.optString("address_id")!=null)
+                        {
+                            String address_id = data.optString("address_id");
+                        }
+                        else {
+                            String address_id = "0";
+                        }
+
+                      //  String order_address_id = "0";/*data.optString("order_address_id");*/
                     } catch (Exception ex) {
                         ex.toString();
                     }
                     if (status == 1) {
                         // Need to Work
+
+                       // Intent intent = new Intent (getApplicationContext(), Activity_AddressBook.class);
+                        //intent.putExtra("message", "null");
+                        //startActivity(intent);
+
+                        gotSuccesfulresponseForSaveAddress();
                         Toast.makeText(Activity_Address_page.this, error.toString(), Toast.LENGTH_SHORT).show();
-                        /*Intent address_book = new Intent(Activity_Address_page.this, Address_Book.class);
-                        startActivity(address_book);*/
+                        //finish();
+
+
+
+
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("message");
@@ -403,15 +663,15 @@ catch (Exception ex)
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("tag", "login");
                 params.put("firm_name", name_firm);
-                params.put("working_hour_from", loading_from/*loading_from*/);
                 params.put("access_token", access_token);
-                params.put("working_hour_to", loading_to/*loading_to*/);
+                params.put("working_hour_from",time1 /*loading_from*//*loading_from*/);
+                params.put("working_hour_to", time2/*loading_to*//*loading_to*/);
                 params.put("survey_no", survey_name);
-                params.put("gmap_address", address);
+                params.put("address", address);
                 params.put("city", city_name);
                 params.put("state", state_name);
                 params.put("pincode", pincode);
-                params.put("address_id", "0");
+                params.put("address_id", address_id);
                 params.put("name_of_person", name_contact);
                 params.put("mobile", mobile);
                 params.put("email", email);
@@ -421,9 +681,19 @@ catch (Exception ex)
                 params.put("firm_type", name_firm);
                 params.put("order_address_id", order_address_id);
                 params.put("firm_type", "0");
+Log.e("@save", params.toString());
                 return params;
             }
-
+            private Map<String, String> checkParams(Map<String, String> map){
+                Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry<String, String> pairs = (Map.Entry<String, String>)it.next();
+                    if(pairs.getValue()==null){
+                        map.put(pairs.getKey(), "");
+                    }
+                }
+                return map;
+            }
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -436,11 +706,32 @@ catch (Exception ex)
                 return "application/json";
             }
         };
-        strReq.setRetryPolicy(new DefaultRetryPolicy(60000,
+        strReq.setRetryPolicy(new DefaultRetryPolicy(0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+       // request.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void gotSuccesfulresponseForSaveAddress(){
+        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        Access_Token=(mSharedPreference.getString("Token", null));
+        /*
+        address_Book(Access_Token, UserId);
+     *//*   btnAdd = (Button) findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(this);
+
+        btnGetAll = (Button) findViewById(R.id.btnGetAll);
+        btnGetAll.setOnClickListener(this);*//*
+
+        listView = (ListView) findViewById(R.id.list);
+
+        adapter = new CustomListAdapter_AddressBook(Activity_AddressBook.this, addressList);
+        listView.setAdapter(adapter);
+*/
+        address_Book1(Access_Token, user_id); //need to work on bug
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -466,20 +757,22 @@ catch (Exception ex)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.back_bt:
+          /*  case R.id.back_bt:
 
                 Toast.makeText(getApplicationContext(), "Back", Toast.LENGTH_SHORT).show();
-                break;
+                break;*/
             case R.id.state:
 
                 Intent i = new Intent(this, Activity_state.class);
                 startActivity(i);
+                finish();
                 //  state.getText().toString();
                 break;
 
             case R.id.city:
                 Intent icity = new Intent(this, Activity_CityNew.class);
                 startActivity(icity);
+                finish();
                 break;
 
             case R.id.survey:
@@ -493,17 +786,190 @@ catch (Exception ex)
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
                 startActivityForResult(intent, 100);
+                finish();
                 break;
-            case R.id.loading_time:
-               /* AppController.getInstance().hideSoftKeyboard(this);
-                timePopup.setVisibility(View.VISIBLE);*/
+            case R.id.loading_time_InputLayout:
+               AppController.getInstance().hideSoftKeyboard(this);
+                timePopup.setVisibility(View.VISIBLE);
                 break;
-
+// Back button functionality
             case R.id.back:
-                Intent back = new Intent(this, Activity_Main.class);
-                startActivity(back);
+                Intent back = new Intent(this, Activity_Dashboard.class);
+               startActivity(back);
+                finish();
                 break;
         }
+    }
+
+    private void address_Book1(final String access_Token, final String userId) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_AddressBook";
+
+       /* pDialog.setMessage("Logging in ...");
+        showDialog();*/
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                Config_URL.URL_ADDRESS_BOOK, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Address Book Response: " + response.toString());
+                //   hideDialog();
+
+                try {
+
+                    final JSONObject jObj = new JSONObject(response);
+                    //  boolean error = jObj.getBoolean("error");
+                    String error = jObj.getString("message");
+                    int status = jObj.getInt("status");
+                    JSONArray data = jObj.optJSONArray("data");
+
+                    // Check for error node in json
+                  /*  if (error!=null)*/
+                    if ( status == 1)
+                    {
+                        try {
+                            //    JSONArray Arraydata = new JSONArray();
+
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject obj = data.getJSONObject(i);
+                                String address_id = obj.optString("address_id");
+                                String firm_name = obj.optString("firm_name");
+                                String working_hour_from = obj.optString("working_hour_from");
+                                String working_hour_to = obj.optString("working_hour_to");
+                                String survey_no = obj.optString("survey_no");
+                                String address = obj.optString("gmap_address");
+                                String state = obj.optString("state");
+                                String city = obj.optString("city");
+                                String pincode = obj.optString("pincode");
+                                String created_by = obj.optString("created_by");
+                                String landline = obj.optString("landline");
+                                String order_address_id = obj.optString("order_address_id");
+                                String name_of_person = obj.optString("name_of_person");
+                                String landmark = obj.optString("landmark");
+                                String mobile = obj.optString("mobile");
+                                String lat = obj.optString("lat");
+                                String lng = obj.optString("lng");
+                            }
+                            bundle = new Bundle();
+                            bundle.putString("addressList", data.toString());
+
+                            AddressList.addressesBundle = data.toString();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.toString();
+                        }
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable(){
+                            @Override
+                            public void run(){
+                                Intent address_Book = new Intent(Activity_Address_page.this, Activity_AddressBook.class);
+                                address_Book.putExtra("message", bundle);
+                                address_Book.putExtra("mode", 0);
+
+                                startActivity(address_Book);
+                                try {
+                                    String errorMsg = jObj.getString("message");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                Toast.makeText(Activity_Address_page.this,
+                                        "succesful", Toast.LENGTH_LONG).show();
+                            }
+                        }, 2000);
+                        alertSave.setVisibility(View.VISIBLE);
+
+
+                    } /*else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("message");
+                        Toast.makeText(getActivity(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+
+                        Intent address_page = new Intent(getActivity(), Activity_Address_page.class);
+                        startActivity(address_page);
+                    }*/
+                    else if (status == 0)
+                    {
+                        String errorMsg = jObj.getString("message");
+                        Toast.makeText(Activity_Address_page.this,
+                                errorMsg, Toast.LENGTH_LONG).show();
+
+                       /* Intent address_page = new Intent(Activity_AddressBook.this, Activity_AddressBook.class);
+                        address_page.putExtra("message", bundle);
+                        address_page.putExtra("mode", 0);
+                        address_page.putExtra("type", whichType);
+                        startActivity(address_page);*/
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Oauth Error: " + error.getMessage());
+               /* Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();*/
+                // As of f605da3 the following should work
+                NetworkResponse response = error.networkResponse;
+                if (error instanceof ServerError && response != null) {
+                    try {
+                        String res = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                        // Now you can use any deserializer to make sense of data
+                        JSONObject obj = new JSONObject(res);
+                    } catch (UnsupportedEncodingException e1) {
+                        // Couldn't properly decode data to string
+                        e1.printStackTrace();
+                    } catch (JSONException e2) {
+                        // returned data is not JSONObject?
+                        e2.printStackTrace();
+                    }
+                }
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("tag", "AddressBook");
+
+                params.put("user_id", userId);
+                params.put("access_token",Access_Token);
+
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+
+                return headers;
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        strReq.setRetryPolicy(new DefaultRetryPolicy(60000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+
+    private void LoadingTimePopUp() {
+        AppController.getInstance().hideSoftKeyboard(this);
+        timePopup.setVisibility(View.VISIBLE);
     }
     public void setTime(View view) {
         int hour1 = timePicker1.getCurrentHour();
@@ -528,7 +994,7 @@ catch (Exception ex)
     public void SaveAdd(final String access_token, final String state_name, final String city_name, final String survey_name,
                         final String name_firm, final String address, final String landline, final String pincode,
                         final String landmark, final String loading_to, final String loading_from,
-                        final String name_contact, final String mobile, final String email, final String firmType) {
+                        final String name_contact, final String mobile, final String email, final String firmType, final String order_add_id, final String address_id) {
 
         // Tag used to cancel the request
         String tag_string_req = "req_saveAddress";
@@ -605,11 +1071,12 @@ catch (Exception ex)
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("tag", "login");
                 params.put("firm_name", name_firm);
-                params.put("working_hour_from", loading_from/*loading_from*/);
+
                 params.put("access_token", access_token);
-                params.put("working_hour_to", loading_to/*loading_to*/);
+                params.put("working_hour_from","10" /*loading_from*//*loading_from*/);
+                params.put("working_hour_to", "21"/*loading_to*//*loading_to*/);
                 params.put("survey_no", survey_name);
-                params.put("gmap_address", address);
+                params.put("address", address);
                 params.put("city", city_name);
                 params.put("state", state_name);
                 params.put("pincode", pincode);
@@ -621,11 +1088,22 @@ catch (Exception ex)
                 params.put("landline", landline);
                 params.put("landmark", landmark);
                 params.put("firm_type", name_firm);
-                params.put("order_address_id", order_address_id);
+                params.put("order_address_id", order_add_id);
                 params.put("firm_type", "0");
+                Log.e("@saveAdd", params.toString());
                 return params;
-            }
 
+            }
+            private Map<String, String> checkParams(Map<String, String> map){
+                Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry<String, String> pairs = (Map.Entry<String, String>)it.next();
+                    if(pairs.getValue()==null){
+                        map.put(pairs.getKey(), "");
+                    }
+                }
+                return map;
+            }
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();

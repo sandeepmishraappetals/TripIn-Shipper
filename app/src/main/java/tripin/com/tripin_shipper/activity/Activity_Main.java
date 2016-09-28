@@ -72,8 +72,10 @@ public class Activity_Main extends Activity implements View.OnClickListener{
 
         already_text = (TextView)findViewById(R.id.textView2);
         already_text.setOnClickListener(this);
-        String name = getColoredSpanned("Already have an Account?", "#A9A9A9");
-        String surName = getColoredSpanned("LOG IN","#34bba8");
+     /*   String name = getColoredSpanned("Already have an Account?", "#A9A9A9");
+        String surName = getColoredSpanned("LOG IN","#34bba8");*/
+        String name = getColoredSpanned("Already have an Account?","#4c4c4c" );
+        String surName = getColoredSpanned("LOG IN","#44d3f1");
         already_text.setText(Html.fromHtml(name+" "+surName));
      }
 
@@ -119,15 +121,7 @@ public class Activity_Main extends Activity implements View.OnClickListener{
 
     };
 
-    /*@Override
-    public void onClick(View v) {
-
-       Intent i = new Intent (this, SignUpActivity.class);
-                startActivity(i);
-        Log.e("@@", "SignUpClick");
-    }*/
-
-    //implement the onClick method here
+     //implement the onClick method here
     public void onClick(View v) {
         // Perform action on click
         switch(v.getId()) {
@@ -136,8 +130,8 @@ public class Activity_Main extends Activity implements View.OnClickListener{
                     NetworkUtils.showNoInternetDialog(Maincontext);
                 } else {
                     //SignUp Activity
-                  //  Intent i = new Intent (this, SignUp_Activity.class);
-                    Intent i = new Intent(this, Activity_Tuck12.class);
+                 Intent i = new Intent (this, SignUp_Activity.class);
+                 //   Intent i = new Intent(this, MapActivity.class);
                     startActivity(i);
                 }
 

@@ -6,4 +6,5 @@ package tripin.com.tripin_shipper.fragment;
 public interface OnFragmentInteractionListener {
     public void onTodayFragmentInteraction(String string);
     public void TomorrowFragmentInteraction();
+
 }

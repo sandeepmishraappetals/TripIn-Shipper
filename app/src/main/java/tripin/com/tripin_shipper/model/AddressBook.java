@@ -22,6 +22,8 @@ public class AddressBook implements Serializable{
     String order_address_id ;
     String name_of_person ;
     String email;
+    String lat;
+    String lng;
 
     public AddressBook()
     {}
@@ -32,7 +34,8 @@ public class AddressBook implements Serializable{
             String created_by ,
             String landline ,
             String order_address_id ,
-            String name_of_person, String mobile, String landmark , String email)
+            String name_of_person, String mobile, String landmark , String email,
+            String lat, String lng )
 
     {
 this.address_id = address_id;
@@ -51,6 +54,8 @@ this.address_id = address_id;
         this.mobile = mobile;
         this.landmark = landmark;
         this.email = email;
+        this.lat = lat;
+        this.lng = lng;
     }
     public String getAddress_id() {
         return address_id;
@@ -176,5 +181,20 @@ this.address_id = address_id;
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
     }
 }

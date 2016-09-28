@@ -15,8 +15,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import tripin.com.tripin_shipper.R;
-
 /**
  * Created by Android on 30/08/16.
  */
@@ -67,7 +65,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         mTitleOffset = (int) (TITLE_OFFSET_DIPS * getResources().getDisplayMetrics().density);
 
         mTabStrip = new SlidingTabStrip(context);
-        addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        addView(mTabStrip, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
     }
 
     /**
@@ -79,6 +77,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
      */
     public void setCustomTabColorizer(TabColorizer tabColorizer) {
         mTabStrip.setCustomTabColorizer(tabColorizer);
+
     }
 
     public void setDistributeEvenly(boolean distributeEvenly) {
@@ -101,6 +100,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
      * @see ViewPager#setOnPageChangeListener(ViewPager.OnPageChangeListener)
      */
     public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
+
         mViewPagerPageChangeListener = listener;
     }
 
@@ -147,6 +147,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         textView.setBackgroundResource(outValue.resourceId);
         textView.setAllCaps(true);
 
+
         int padding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
         textView.setPadding(padding, padding, padding, padding);
 
@@ -173,6 +174,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
             if (tabTitleView == null && TextView.class.isInstance(tabView)) {
                 tabTitleView = (TextView) tabView;
+
             }
 
             if (mDistributeEvenly) {
@@ -196,8 +198,12 @@ public class SlidingTabLayout extends HorizontalScrollView {
             }
 
             assert tabTitleView != null;
-            tabTitleView.setTextColor(getResources().getColorStateList(R.color.dash_tab_high));
+           // tabTitleView.setTextColor(getResources().getColorStateList(R.color.dash_tab_high));
+            tabTitleView.setTextColor(getResources().getColorStateList(tripin.com.tripin_shipper.R.color.selector));
             tabTitleView.setTextSize(14);
+            if (i == mViewPager.getCurrentItem()) {
+                tabView.setSelected(true);
+            }
         }
     }
 
@@ -274,6 +280,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             }
             for (int i = 0; i < mTabStrip.getChildCount(); i++) {
                 mTabStrip.getChildAt(i).setSelected(position == i);
+
             }
             if (mViewPagerPageChangeListener != null) {
                 mViewPagerPageChangeListener.onPageSelected(position);
